@@ -1,0 +1,69 @@
+[versions]
+base = "1.0.0"
+junit = "4.13.2"
+test-runner = "1.6.2"
+agp = "8.9.2"
+kotlin = "2.1.20"
+kotlinx-datetime = "0.6.1"
+kotlinx-serialization-json = "1.7.3"
+core-ktx = "1.16.0"
+material3 = "1.3.2"
+compose = "1.8.1"
+navigation = "2.9.0"
+navigation-material = "1.8.1"
+koin = "3.5.6"
+room = "2.7.1"
+ksp = "2.1.20-2.0.1"
+
+[libraries]
+
+# Test
+junit = { module = "junit:junit", version.ref = "junit" }
+test-runner = { module = "androidx.test:runner", version.ref = "test-runner" }
+
+# Android
+androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "core-ktx"}
+
+# Koin
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
+koin-android-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin" }
+
+# Compose
+compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "material3" }
+compose-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
+compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
+
+# Gradle Plugins
+android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
+kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+
+# Kotlin
+kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
+kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
+kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization-json" }
+
+# Room
+androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+
+# Navigation
+navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation"}
+navigation-material = { module = "androidx.compose.material:material-navigation", version.ref = "navigation-material"}
+
+# Base
+base = { module = "com.daniel:base", version.ref = "base" }
+
+[plugins]
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+
+[bundles]
+testing = ["junit", "test-runner"]
+androidx = ["androidx-core-ktx"]
+compose = ["compose-material3", "compose-preview", "compose-ui-tooling"]
+navigation = ["navigation-compose", "navigation-material"]
+kotlin = ["kotlin-reflect", "kotlinx-serialization", "kotlinx-datetime"]
+koin = ["koin-android", "koin-android-compose"]
+room = ["androidx-room-ktx", "androidx-room-runtime"]
