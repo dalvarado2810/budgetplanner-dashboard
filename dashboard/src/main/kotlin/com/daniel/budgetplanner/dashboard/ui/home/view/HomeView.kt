@@ -17,12 +17,14 @@ import com.daniel.budgetplanner.dashboard.domain.model.Category
 import com.daniel.budgetplanner.dashboard.domain.model.DashboardBalances
 import com.daniel.budgetplanner.dashboard.presentation.home.model.MovementItem
 import com.daniel.budgetplanner.dashboard.presentation.home.mvi.Home
-import com.daniel.budgetplanner.dashboard.ui.home.composables.BackgroundCard
-import com.daniel.budgetplanner.dashboard.ui.home.composables.HomeTopRow
+import com.daniel.budgetplanner.dashboard.ui.home.components.BackgroundCard
+import com.daniel.budgetplanner.dashboard.ui.home.components.BalanceInformationComponent
+import com.daniel.budgetplanner.dashboard.ui.home.components.HomeTopRow
 
 @Composable
 fun HomeView(
-    state: Home.State.Content
+    state: Home.State.Content,
+    onToggleVisibility: () -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -47,6 +49,12 @@ fun HomeView(
                 onEraseUserClick = {},
                 onPrivacyPolicyClick = {}
             )
+
+            BalanceInformationComponent(
+                balances = state.actualBalances,
+                isBalanceVisible = state.isBalanceVisible,
+                onToggleVisibility = onToggleVisibility
+            )
         }
     }
 }
@@ -57,7 +65,17 @@ fun DashboardViewPreview() {
     HomeView(
         state = Home.State.Content(
             name = "Daniel Alvarado",
-            actualBalances = DashboardBalances(),
+            actualBalances = DashboardBalances(
+                actualBalance = -200000,
+                monthlyIncomeBalance = -342150,
+                otherIncomesBalance = 3500,
+                healthExpensesBalance = 4500,
+                foodExpensesBalance = 40000,
+                servicesExpensesBalance = 3400,
+                antExpensesBalance = 500,
+                outfitExpensesBalance = 10000,
+                transportExpensesBalance = 50000
+            ),
             movements = listOf(
                 MovementItem(
                     name = "Gasto comun apartamento",
@@ -72,7 +90,9 @@ fun DashboardViewPreview() {
             isPolicyDialogShown = false,
             isMenuShown = false,
             isFilterShown = false,
-            isChangeUserDialogShown = false
-        )
+            isChangeUserDialogShown = false,
+            isBalanceVisible = false
+        ),
+        onToggleVisibility = {}
     )
 }

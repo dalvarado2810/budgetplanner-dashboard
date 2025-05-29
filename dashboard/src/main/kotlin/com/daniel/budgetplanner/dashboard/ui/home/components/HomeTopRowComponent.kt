@@ -1,4 +1,4 @@
-package com.daniel.budgetplanner.dashboard.ui.home.composables
+package com.daniel.budgetplanner.dashboard.ui.home.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

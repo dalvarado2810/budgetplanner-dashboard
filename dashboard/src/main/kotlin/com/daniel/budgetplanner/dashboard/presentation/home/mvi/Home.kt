@@ -22,12 +22,15 @@ object Home {
             val isMenuShown: Boolean,
             val isPolicyDialogShown: Boolean,
             val isDatePickerShown: Boolean,
-            val isChangeUserDialogShown: Boolean
+            val isChangeUserDialogShown: Boolean,
+            val isBalanceVisible: Boolean
         ) : State()
     }
 
     sealed class Action : ViewAction() {
         data object Init : Action()
+
+        data object ToggleVisibility: Action()
 
         data object IncomeButtonClick : Action()
 

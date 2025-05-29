@@ -25,7 +25,8 @@ fun HomeRoute(
     }
 
     HomeScreen(
-        state = viewState
+        state = viewState,
+        onToggleVisibility = viewModel::onToggleVisibilityAction
     )
 
 }

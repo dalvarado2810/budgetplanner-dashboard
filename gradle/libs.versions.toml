@@ -30,6 +30,7 @@ koin-android-compose = { module = "io.insert-koin:koin-androidx-compose", versio
 
 # Compose
 compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "material3" }
+compose-material-icons = { module = "androidx.compose.material:material-icons-core-android", version.ref = "material3"}
 compose-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
 
@@ -62,7 +63,7 @@ compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "
 [bundles]
 testing = ["junit", "test-runner"]
 androidx = ["androidx-core-ktx"]
-compose = ["compose-material3", "compose-preview", "compose-ui-tooling"]
+compose = ["compose-material3", "compose-preview", "compose-ui-tooling", "compose-material-icons"]
 navigation = ["navigation-compose", "navigation-material"]
 kotlin = ["kotlin-reflect", "kotlinx-serialization", "kotlinx-datetime"]
 koin = ["koin-android", "koin-android-compose"]
