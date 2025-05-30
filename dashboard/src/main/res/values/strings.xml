@@ -14,6 +14,7 @@
     <string name="privacy_policy_date">Fecha de vigencia: 21/01/2024</string>
     <string name="privacy_policy_questions">Si tiene preguntas o inquietudes sobre esta política de privacidad, comuníquese con nosotros al correo enviromenttech@gmail.com</string>
     <string name="exit">Salir</string>
+    <string name="dashboard_select_date">Selecciona el periodo deseado</string>
 
     <string name="privacy_policy_text">
         <![CDATA[
@@ -74,6 +75,9 @@
     <string name="select_date">Selecciona el periodo deseado</string>
     <string name="outcome">GASTO</string>
     <string name="description">Descripción</string>
+    <string name="positive_option">OK</string>
+    <string name="negative_option">Cancelar</string>
+    <string name="confirmation_dialog_text">Estas seguro de cambiar de Usuario?</string>
     <string name="amount">Monto</string>
     <string name="category">Tipo</string>
     <string name="save_movement">Guardar</string>
@@ -83,5 +87,10 @@
     <string name="add_movement_amount">Debes agregar un monto superior a CERO</string>
     <string name="last_transactions">Ultimas transacciones</string>
     <string name="select_range_of_date">Seleccion período a calcular</string>
+    <string name="get_started_privacy_policy">Políticas de privacidad</string>
+    <string name="get_started_privacy_policy_title">Política de Privacidad para Monitor de Gastos</string>
+    <string name="get_started_privacy_policy_date">Fecha de vigencia: 21/01/2024</string>
+    <string name="get_started_privacy_policy_questions">Si tiene preguntas o inquietudes sobre esta política de privacidad, comuníquese con nosotros al correo enviromenttech@gmail.com</string>
+    <string name="get_started_exit">Salir</string>
 
 </resources>

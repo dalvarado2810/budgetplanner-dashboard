@@ -19,12 +19,26 @@ import com.daniel.budgetplanner.dashboard.presentation.home.model.MovementItem
 import com.daniel.budgetplanner.dashboard.presentation.home.mvi.Home
 import com.daniel.budgetplanner.dashboard.ui.home.components.BackgroundCard
 import com.daniel.budgetplanner.dashboard.ui.home.components.BalanceInformationComponent
+import com.daniel.budgetplanner.dashboard.ui.home.components.ConfirmationDialog
 import com.daniel.budgetplanner.dashboard.ui.home.components.HomeTopRow
+import com.daniel.budgetplanner.dashboard.ui.home.components.MyDateRangePickerDialog
+import com.daniel.budgetplanner.dashboard.ui.home.components.PolicyDialog
+import java.time.LocalDate
 
 @Composable
 fun HomeView(
     state: Home.State.Content,
-    onToggleVisibility: () -> Unit
+    onToggleVisibility: () -> Unit,
+    onMenuClick: () -> Unit,
+    onMenuDismiss: () -> Unit,
+    onEraseUserClick: () -> Unit,
+    onPrivacyPolicy: () -> Unit,
+    onPrivacyPolicyDismiss: () -> Unit,
+    onDateChange: () -> Unit,
+    onDatePickerDismiss: () -> Unit,
+    onNewPeriodSelected: (LocalDate?, LocalDate?) -> Unit,
+    onChangeUserConfirmation: () -> Unit,
+    onChangeUserDialogDismiss: () -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -43,17 +57,39 @@ fun HomeView(
                     .padding(top = dimensionResource(R.dimen.dimen_16dp)),
                 name = state.name,
                 isMenuShown = state.isMenuShown,
-                onMenuClick = {},
-                onMenuDismiss = {},
-                onChangeDateClick = {},
-                onEraseUserClick = {},
-                onPrivacyPolicyClick = {}
+                onMenuClick = onMenuClick,
+                onMenuDismiss = onMenuDismiss,
+                onChangeDateClick = onDateChange,
+                onEraseUserClick = onEraseUserClick,
+                onPrivacyPolicyClick = onPrivacyPolicy
             )
 
             BalanceInformationComponent(
                 balances = state.actualBalances,
                 isBalanceVisible = state.isBalanceVisible,
                 onToggleVisibility = onToggleVisibility
+            )
+        }
+
+        if (state.isDatePickerShown) {
+            MyDateRangePickerDialog(
+                onRangeDatesSelected = { start, end ->
+                    onNewPeriodSelected(start, end)
+                },
+                onDismiss = onDatePickerDismiss
+            )
+        }
+
+        if (state.isPolicyDialogShown) {
+            PolicyDialog(
+                onDismiss = onPrivacyPolicyDismiss
+            )
+        }
+
+        if (state.isChangeUserDialogShown) {
+            ConfirmationDialog(
+                onPositiveAction = onChangeUserConfirmation,
+                onDismissAction = onChangeUserDialogDismiss
             )
         }
     }
@@ -93,6 +129,16 @@ fun DashboardViewPreview() {
             isChangeUserDialogShown = false,
             isBalanceVisible = false
         ),
-        onToggleVisibility = {}
+        onToggleVisibility = {},
+        onMenuClick = {},
+        onMenuDismiss = {},
+        onEraseUserClick = {},
+        onDateChange = {},
+        onPrivacyPolicy = {},
+        onDatePickerDismiss = {},
+        onNewPeriodSelected = {_,_ ->},
+        onPrivacyPolicyDismiss = {},
+        onChangeUserConfirmation = {},
+        onChangeUserDialogDismiss = {}
     )
 }

@@ -67,18 +67,6 @@ fun HomeTopRow(
         ) {
             DropdownMenuItem(
                 onClick = {
-                    onEraseUserClick()
-                },
-                text = {
-                    Text(
-                        text = stringResource(id = R.string.erase_user),
-                        style = DashboardTextStyles.text12spBlack
-                    )
-                }
-            )
-
-            DropdownMenuItem(
-                onClick = {
                     onChangeDateClick()
                 },
                 text = {
@@ -96,6 +84,18 @@ fun HomeTopRow(
                 text = {
                     Text(
                         text = stringResource(id = R.string.privacy_policy),
+                        style = DashboardTextStyles.text12spBlack
+                    )
+                }
+            )
+
+            DropdownMenuItem(
+                onClick = {
+                    onEraseUserClick()
+                },
+                text = {
+                    Text(
+                        text = stringResource(id = R.string.erase_user),
                         style = DashboardTextStyles.text12spBlack
                     )
                 }

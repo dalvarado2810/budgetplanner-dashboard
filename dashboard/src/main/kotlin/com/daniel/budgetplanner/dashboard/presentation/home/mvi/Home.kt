@@ -34,17 +34,21 @@ object Home {
 
         data object IncomeButtonClick : Action()
 
-        data object HideBalancesButtonClick : Action()
-
         data object DismissIncomeDialog : Action()
 
         data object MenuButtonClick : Action()
+
+        data object MenuDismissClick : Action()
 
         data object EraseUserMenuSelection : Action()
 
         data object NewPeriodMenuSelection : Action()
 
+        data object DatePickerDismiss : Action()
+
         data object PolicyMenuSelection : Action()
+
+        data object PolicyDialogDismiss : Action()
 
         data object FilterButtonClick : Action()
 

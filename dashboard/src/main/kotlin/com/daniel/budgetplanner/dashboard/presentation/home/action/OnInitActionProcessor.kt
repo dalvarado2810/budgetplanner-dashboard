@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.flow
 
 private const val DELAY_MILLIS = 3000L
 
-class InitActionProcessor : ActionProcessor<Home.State, Home.Action.Init, Home.Effect>() {
+class OnInitActionProcessor : ActionProcessor<Home.State, Home.Action.Init, Home.Effect>() {
     override fun process(
         action: Home.Action.Init,
         sideEffect: (Home.Effect) -> Unit

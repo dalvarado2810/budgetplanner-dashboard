@@ -11,7 +11,11 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.sp
 import com.daniel.budgetplanner.dashboard.R
 import java.text.NumberFormat
+import java.time.Instant
+import java.time.LocalDate
+import java.time.LocalDateTime
 import java.util.Locale
+import java.util.TimeZone
 
 @Composable
 fun String.toFormattedName(): AnnotatedString = buildAnnotatedString {
@@ -34,4 +38,12 @@ fun Int.toFormattedAmount(isVisible: Boolean = true): String {
 
 fun setActualBalanceColor(actualBalance: Int): Color {
     return if (actualBalance < 0) Color.Red else Color.Black
+}
+
+fun convertMillisToDate(millis: Long):LocalDate {
+    val localDate = LocalDateTime
+        .ofInstant(
+            Instant.ofEpochMilli(millis),
+            TimeZone.getDefault().toZoneId())
+    return localDate.plusDays(1L).toLocalDate()
 }

@@ -4,6 +4,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.LineHeightStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import com.daniel.base.ui.theme.fonts
 
@@ -50,5 +51,20 @@ object DashboardTextStyles {
         fontSize = 38.sp,
         fontWeight = FontWeight.Bold,
         fontFamily = fonts
+    )
+
+    val text19spBlackCenter = TextStyle(
+        textAlign = TextAlign.Center,
+        color = Color.Black,
+        fontSize = 19.sp,
+        fontFamily = fonts
+    )
+
+    val text22spBlackBoldCenter = TextStyle(
+        fontWeight = FontWeight.Bold,
+        fontFamily = fonts,
+        fontSize = 22.sp,
+        textAlign = TextAlign.Center,
+        color = Color.Black
     )
 }

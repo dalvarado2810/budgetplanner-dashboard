@@ -26,7 +26,17 @@ fun HomeRoute(
 
     HomeScreen(
         state = viewState,
-        onToggleVisibility = viewModel::onToggleVisibilityAction
+        onToggleVisibility = viewModel::onToggleVisibilityAction,
+        onMenuClick = viewModel::onMenuClickAction,
+        onMenuDismiss = viewModel::onMenuDismissAction,
+        onEraseUserClick = viewModel::onEraseUserClickAction,
+        onPrivacyPolicy = viewModel::onPolicyButtonClickAction,
+        onPrivacyPolicyDismiss = viewModel::onPolicyDialogDismissAction,
+        onDateChange = viewModel::onDatePickerClickAction,
+        onDatePickerDismiss = viewModel::onDatePickerDismissAction,
+        onNewPeriodSelected = {_,_ ->},
+        onChangeUserConfirmation = viewModel::onConfirmEraseUserAction,
+        onChangeUserDialogDismiss = viewModel::onCancelEraseUserAction
     )
 
 }
