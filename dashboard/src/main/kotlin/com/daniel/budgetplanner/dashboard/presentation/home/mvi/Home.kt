@@ -4,7 +4,8 @@ import com.daniel.base.presentation.ViewAction
 import com.daniel.base.presentation.ViewEffect
 import com.daniel.base.presentation.ViewState
 import com.daniel.budgetplanner.dashboard.domain.model.DashboardBalances
-import com.daniel.budgetplanner.dashboard.presentation.home.model.Movements
+import com.daniel.budgetplanner.dashboard.domain.model.PresentationMovements
+import com.daniel.budgetplanner.dashboard.utils.ALL_CATEGORIES
 
 object Home {
     sealed class State : ViewState() {
@@ -15,15 +16,15 @@ object Home {
         data class Content(
             val name: String,
             val actualBalances: DashboardBalances,
-            val movements: Movements,
+            val movements: PresentationMovements,
             val rangeDates: Pair<String, String>,
-            val categorySelected: String,
-            val isFilterShown: Boolean,
-            val isMenuShown: Boolean,
-            val isPolicyDialogShown: Boolean,
-            val isDatePickerShown: Boolean,
-            val isChangeUserDialogShown: Boolean,
-            val isBalanceVisible: Boolean
+            val categorySelected: String = ALL_CATEGORIES,
+            val isFilterShown: Boolean = false,
+            val isMenuShown: Boolean = false,
+            val isPolicyDialogShown: Boolean = false,
+            val isDatePickerShown: Boolean = false,
+            val isChangeUserDialogShown: Boolean = false,
+            val isBalanceVisible: Boolean = true
         ) : State()
     }
 

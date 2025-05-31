@@ -32,6 +32,11 @@ object DashboardTextStyles {
         fontFamily = fonts
     )
 
+    val text16spBolNoFonts = TextStyle(
+        fontSize = 16.sp,
+        fontWeight = FontWeight.Bold
+    )
+
     val text10spBold = TextStyle(
         fontSize = 10.sp,
         fontWeight = FontWeight.Bold,

@@ -111,7 +111,7 @@ fun HomeTopRow(
                 .sizeIn(dimensionResource(R.dimen.dimen_48dp)),
         ) {
             Image(
-                painterResource(id = R.drawable.baseline_menu_24),
+                painterResource(id = R.drawable.ic_dropdown_menu),
                 contentDescription = DROPDOWN_IMAGE,
                 modifier = Modifier.sizeIn(dimensionResource(R.dimen.dimen_48dp))
             )
