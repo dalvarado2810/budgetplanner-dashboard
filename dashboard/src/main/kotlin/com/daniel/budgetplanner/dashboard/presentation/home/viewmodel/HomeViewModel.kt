@@ -72,6 +72,14 @@ class HomeViewModel(
         sendAction(Home.Action.CancelEraseUser)
     }
 
+    fun onIncomeButtonClickAction() {
+        sendAction(Home.Action.IncomeButtonClick)
+    }
+
+    fun onExpenseButtonClickAction() {
+        sendAction(Home.Action.ExpenseButtonClick)
+    }
+
     override fun processAction(
         action: Home.Action,
         sideEffect: (Home.Effect) -> Unit
@@ -84,13 +92,11 @@ class HomeViewModel(
                 //miss real usecase
                 onConfirmEraseUserActionProcessor.process(action, sideEffect)
             }
-            is Home.Action.DismissIncomeDialog -> TODO()
             is Home.Action.EraseUserMenuSelection -> {
                 onEraseUserMenuSelectionActionProcessor.process(action, sideEffect)
             }
             is Home.Action.FilterButtonClick -> TODO()
             is Home.Action.FilterCategorySelection -> TODO()
-            is Home.Action.IncomeButtonClick -> TODO()
             is Home.Action.Init -> {
                 onInitActionProcessor.process(action, sideEffect)
             }
@@ -116,6 +122,8 @@ class HomeViewModel(
             is Home.Action.PolicyDialogDismiss -> {
                 onPolicyDialogDismissActionProcessor.process(action, sideEffect)
             }
+            is Home.Action.ExpenseButtonClick -> TODO()
+            is Home.Action.IncomeButtonClick -> TODO()
         }
     }
 }

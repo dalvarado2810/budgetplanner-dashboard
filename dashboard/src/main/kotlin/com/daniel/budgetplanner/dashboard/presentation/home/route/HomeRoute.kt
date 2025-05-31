@@ -36,7 +36,9 @@ fun HomeRoute(
         onDatePickerDismiss = viewModel::onDatePickerDismissAction,
         onNewPeriodSelected = {_,_ ->},
         onChangeUserConfirmation = viewModel::onConfirmEraseUserAction,
-        onChangeUserDialogDismiss = viewModel::onCancelEraseUserAction
+        onChangeUserDialogDismiss = viewModel::onCancelEraseUserAction,
+        onIncomeButtonClick = {},
+        onExpenseButtonClick = {}
     )
 
 }

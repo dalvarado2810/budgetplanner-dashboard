@@ -17,7 +17,7 @@ fun BackgroundCard() {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(dimensionResource(R.dimen.dimen_347dp)),
+            .height(dimensionResource(R.dimen.dimen_335dp)),
         shape = RoundedCornerShape(
             bottomStart = dimensionResource(R.dimen.dimen_50dp),
             bottomEnd = dimensionResource(R.dimen.dimen_50dp)

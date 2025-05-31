@@ -21,6 +21,7 @@ import com.daniel.budgetplanner.dashboard.ui.home.components.BackgroundCard
 import com.daniel.budgetplanner.dashboard.ui.home.components.BalanceInformationComponent
 import com.daniel.budgetplanner.dashboard.ui.home.components.ConfirmationDialog
 import com.daniel.budgetplanner.dashboard.ui.home.components.HomeTopRow
+import com.daniel.budgetplanner.dashboard.ui.home.components.MovementsButtonRowComponent
 import com.daniel.budgetplanner.dashboard.ui.home.components.MyDateRangePickerDialog
 import com.daniel.budgetplanner.dashboard.ui.home.components.PolicyDialog
 import java.time.LocalDate
@@ -38,7 +39,9 @@ fun HomeView(
     onDatePickerDismiss: () -> Unit,
     onNewPeriodSelected: (LocalDate?, LocalDate?) -> Unit,
     onChangeUserConfirmation: () -> Unit,
-    onChangeUserDialogDismiss: () -> Unit
+    onChangeUserDialogDismiss: () -> Unit,
+    onIncomeButtonClick: () -> Unit,
+    onExpenseButtonClick: () -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -68,6 +71,11 @@ fun HomeView(
                 balances = state.actualBalances,
                 isBalanceVisible = state.isBalanceVisible,
                 onToggleVisibility = onToggleVisibility
+            )
+
+            MovementsButtonRowComponent(
+                onIncomeButtonClick = onIncomeButtonClick,
+                onExpenseButtonClick = onExpenseButtonClick
             )
         }
 
@@ -127,7 +135,7 @@ fun DashboardViewPreview() {
             isMenuShown = false,
             isFilterShown = false,
             isChangeUserDialogShown = false,
-            isBalanceVisible = false
+            isBalanceVisible = true
         ),
         onToggleVisibility = {},
         onMenuClick = {},
@@ -139,6 +147,8 @@ fun DashboardViewPreview() {
         onNewPeriodSelected = {_,_ ->},
         onPrivacyPolicyDismiss = {},
         onChangeUserConfirmation = {},
-        onChangeUserDialogDismiss = {}
+        onChangeUserDialogDismiss = {},
+        onIncomeButtonClick = {},
+        onExpenseButtonClick = {}
     )
 }

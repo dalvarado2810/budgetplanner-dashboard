@@ -35,7 +35,7 @@ object Home {
 
         data object IncomeButtonClick : Action()
 
-        data object DismissIncomeDialog : Action()
+        data object ExpenseButtonClick : Action()
 
         data object MenuButtonClick : Action()
 

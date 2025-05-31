@@ -19,7 +19,9 @@ fun HomeScreen(
     onDatePickerDismiss: () -> Unit,
     onNewPeriodSelected: (LocalDate?, LocalDate?) -> Unit,
     onChangeUserConfirmation: () -> Unit,
-    onChangeUserDialogDismiss: () -> Unit
+    onChangeUserDialogDismiss: () -> Unit,
+    onIncomeButtonClick: () -> Unit,
+    onExpenseButtonClick: () -> Unit
 ) {
     when (state) {
         is Home.State.Content -> {
@@ -35,8 +37,9 @@ fun HomeScreen(
                 onNewPeriodSelected = onNewPeriodSelected,
                 onDatePickerDismiss = onDatePickerDismiss,
                 onChangeUserDialogDismiss = onChangeUserDialogDismiss,
-                onChangeUserConfirmation = onChangeUserConfirmation
-
+                onChangeUserConfirmation = onChangeUserConfirmation,
+                onIncomeButtonClick = onIncomeButtonClick,
+                onExpenseButtonClick = onExpenseButtonClick
             )
         }
         is Home.State.Error -> {}
