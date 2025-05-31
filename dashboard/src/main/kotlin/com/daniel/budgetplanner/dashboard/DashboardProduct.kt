@@ -8,6 +8,7 @@ import com.daniel.base.Product
 import com.daniel.budgetplanner.dashboard.di.dashboardModule
 import com.daniel.budgetplanner.dashboard.navigation.DashboardDestination
 import com.daniel.budgetplanner.dashboard.presentation.home.route.HomeRoute
+import com.daniel.budgetplanner.onboarding.navigation.OnboardingDestination
 import org.koin.core.module.Module
 
 object DashboardProduct : Product() {
@@ -15,7 +16,11 @@ object DashboardProduct : Product() {
         navGraphBuilder.navigation<DashboardDestination.NavGraph>(
             startDestination = DashboardDestination.Home) {
                 composable<DashboardDestination.Home> {
-                    HomeRoute()
+                    HomeRoute(
+                        navigateToGetStarted = {
+                            navController.navigate(OnboardingDestination.GetStarted)
+                        }
+                    )
                 }
         }
     }

@@ -14,6 +14,7 @@ navigation-material = "1.8.1"
 koin = "3.5.6"
 room = "2.7.1"
 ksp = "2.1.20-2.0.1"
+onboarding-navigation = "1.0.0"
 
 [libraries]
 
@@ -55,6 +56,9 @@ navigation-material = { module = "androidx.compose.material:material-navigation"
 # Base
 base = { module = "com.daniel:base", version.ref = "base" }
 
+# Product Navigations
+onboarding-navigation = { module = "com.daniel.budgetplanner:onboarding-navigation", version.ref = "onboarding-navigation" }
+
 [plugins]
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
@@ -67,4 +71,5 @@ compose = ["compose-material3", "compose-preview", "compose-ui-tooling", "compos
 navigation = ["navigation-compose", "navigation-material"]
 kotlin = ["kotlin-reflect", "kotlinx-serialization", "kotlinx-datetime"]
 koin = ["koin-android", "koin-android-compose"]
+products-navigation = ["onboarding-navigation"]
 room = ["androidx-room-ktx", "androidx-room-runtime"]

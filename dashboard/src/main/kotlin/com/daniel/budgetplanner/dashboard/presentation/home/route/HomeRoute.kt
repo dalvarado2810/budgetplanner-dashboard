@@ -11,7 +11,8 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun HomeRoute(
-    viewModel: HomeViewModel = koinViewModel()
+    viewModel: HomeViewModel = koinViewModel(),
+    navigateToGetStarted: () -> Unit
 ) {
     val viewState by viewModel.state.collectAsStateWithLifecycle()
 
@@ -21,6 +22,7 @@ fun HomeRoute(
             is Home.Effect.NavigateToExpenseDialog -> TODO()
             is Home.Effect.NavigateToIncomeDialog -> TODO()
             is Home.Effect.NavigateToPolicyDialog -> TODO()
+            is Home.Effect.NavigateToGetStarted -> navigateToGetStarted()
         }
     }
 

@@ -4,6 +4,7 @@ import androidx.room.Room
 import com.daniel.budgetplanner.dashboard.data.local.database.MovementDataBase
 import com.daniel.budgetplanner.dashboard.data.repositories.MovementRepositoryImpl
 import com.daniel.budgetplanner.dashboard.domain.repositories.MovementRepository
+import com.daniel.budgetplanner.dashboard.domain.usecases.EraseUserUseCase
 import com.daniel.budgetplanner.dashboard.domain.usecases.InitUseCase
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnCancelEraseUserActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnInitActionProcessor
@@ -45,6 +46,7 @@ val dashboardModule = module {
 
     // Use Cases
     factoryOf(::InitUseCase)
+    factoryOf(::EraseUserUseCase)
 
     // Repositories
     singleOf(::MovementRepositoryImpl) { bind<MovementRepository>() }

@@ -89,7 +89,6 @@ class HomeViewModel(
                 onCancelEraseUserActionProcessor.process(action, sideEffect)
             }
             is Home.Action.ConfirmEraseUser -> {
-                //miss real usecase
                 onConfirmEraseUserActionProcessor.process(action, sideEffect)
             }
             is Home.Action.EraseUserMenuSelection -> {

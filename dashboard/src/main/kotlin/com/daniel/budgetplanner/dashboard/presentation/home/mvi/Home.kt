@@ -70,5 +70,7 @@ object Home {
         data object NavigateToDatePicker : Effect()
 
         data object NavigateToPolicyDialog : Effect()
+
+        data object NavigateToGetStarted : Effect()
     }
 }

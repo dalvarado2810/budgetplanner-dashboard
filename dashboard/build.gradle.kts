@@ -84,6 +84,9 @@ dependencies {
     /* Base */
     implementation(libs.base)
 
+    /* Products Navigations */
+    implementation(libs.bundles.products.navigation)
+
     /* Room */
     implementation(libs.bundles.room)
     ksp(libs.androidx.room.compiler)
