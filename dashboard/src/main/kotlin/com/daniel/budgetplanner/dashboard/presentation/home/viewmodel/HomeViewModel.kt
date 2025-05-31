@@ -10,11 +10,13 @@ import com.daniel.budgetplanner.dashboard.presentation.home.action.OnConfirmEras
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnDatePickerDismissActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnEraseUserMenuSelectionActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnNewPeriodMenuSelectionActionProcessor
+import com.daniel.budgetplanner.dashboard.presentation.home.action.OnNewPeriodSelectedActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnPolicyClickActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnPolicyDialogDismissActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnToggleVisibilityActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.mvi.Home
 import kotlinx.coroutines.flow.Flow
+import java.time.LocalDate
 
 class HomeViewModel(
     val onInitActionProcessor: OnInitActionProcessor,
@@ -27,7 +29,8 @@ class HomeViewModel(
     val onDatePickerDismissActionProcessor: OnDatePickerDismissActionProcessor,
     val onEraseUserMenuSelectionActionProcessor: OnEraseUserMenuSelectionActionProcessor,
     val onConfirmEraseUserActionProcessor: OnConfirmEraseUserActionProcessor,
-    val onCancelEraseUserActionProcessor: OnCancelEraseUserActionProcessor
+    val onCancelEraseUserActionProcessor: OnCancelEraseUserActionProcessor,
+    val onNewPeriodSelectedActionProcessor: OnNewPeriodSelectedActionProcessor
 ) : BaseViewModel<Home.State, Home.Action, Home.Effect>(
     initialState = Home.State.Loading,
     initialAction = Home.Action.Init
@@ -72,6 +75,13 @@ class HomeViewModel(
         sendAction(Home.Action.CancelEraseUser)
     }
 
+    fun onNewPeriodSelected(
+        startDate: LocalDate?,
+        endDate: LocalDate?
+    ) {
+        sendAction(Home.Action.OnNewPeriodSelected(startDate, endDate))
+    }
+
     fun onIncomeButtonClickAction() {
         sendAction(Home.Action.IncomeButtonClick)
     }
@@ -93,6 +103,9 @@ class HomeViewModel(
             }
             is Home.Action.EraseUserMenuSelection -> {
                 onEraseUserMenuSelectionActionProcessor.process(action, sideEffect)
+            }
+            is Home.Action.OnNewPeriodSelected -> {
+                onNewPeriodSelectedActionProcessor.process(action, sideEffect)
             }
             is Home.Action.FilterButtonClick -> TODO()
             is Home.Action.FilterCategorySelection -> TODO()

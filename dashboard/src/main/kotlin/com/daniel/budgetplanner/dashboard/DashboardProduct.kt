@@ -19,6 +19,9 @@ object DashboardProduct : Product() {
                     HomeRoute(
                         navigateToGetStarted = {
                             navController.navigate(OnboardingDestination.GetStarted)
+                        },
+                        navigateToHomeInit = {
+                            navController.navigate(DashboardDestination.NavGraph)
                         }
                     )
                 }

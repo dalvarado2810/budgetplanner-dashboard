@@ -12,7 +12,8 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun HomeRoute(
     viewModel: HomeViewModel = koinViewModel(),
-    navigateToGetStarted: () -> Unit
+    navigateToGetStarted: () -> Unit,
+    navigateToHomeInit: () -> Unit
 ) {
     val viewState by viewModel.state.collectAsStateWithLifecycle()
 
@@ -23,6 +24,7 @@ fun HomeRoute(
             is Home.Effect.NavigateToIncomeDialog -> TODO()
             is Home.Effect.NavigateToPolicyDialog -> TODO()
             is Home.Effect.NavigateToGetStarted -> navigateToGetStarted()
+            is Home.Effect.NavigateToHomeInit -> navigateToHomeInit()
         }
     }
 
@@ -36,7 +38,12 @@ fun HomeRoute(
         onPrivacyPolicyDismiss = viewModel::onPolicyDialogDismissAction,
         onDateChange = viewModel::onDatePickerClickAction,
         onDatePickerDismiss = viewModel::onDatePickerDismissAction,
-        onNewPeriodSelected = {_,_ ->},
+        onNewPeriodSelected = { startDate, endDate ->
+            viewModel.onNewPeriodSelected(
+                startDate = startDate,
+                endDate = endDate
+            )
+        },
         onChangeUserConfirmation = viewModel::onConfirmEraseUserAction,
         onChangeUserDialogDismiss = viewModel::onCancelEraseUserAction,
         onIncomeButtonClick = {},

@@ -6,6 +6,7 @@ import com.daniel.budgetplanner.dashboard.data.repositories.MovementRepositoryIm
 import com.daniel.budgetplanner.dashboard.domain.repositories.MovementRepository
 import com.daniel.budgetplanner.dashboard.domain.usecases.EraseUserUseCase
 import com.daniel.budgetplanner.dashboard.domain.usecases.InitUseCase
+import com.daniel.budgetplanner.dashboard.domain.usecases.NewPeriodSelectedUseCase
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnCancelEraseUserActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnInitActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnMenuDismissActionProcessor
@@ -14,6 +15,7 @@ import com.daniel.budgetplanner.dashboard.presentation.home.action.OnClickMenuAc
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnConfirmEraseUserActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnDatePickerDismissActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnEraseUserMenuSelectionActionProcessor
+import com.daniel.budgetplanner.dashboard.presentation.home.action.OnNewPeriodSelectedActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnPolicyClickActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnPolicyDialogDismissActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnToggleVisibilityActionProcessor
@@ -43,10 +45,12 @@ val dashboardModule = module {
     factoryOf(::OnEraseUserMenuSelectionActionProcessor)
     factoryOf(::OnConfirmEraseUserActionProcessor)
     factoryOf(::OnCancelEraseUserActionProcessor)
+    factoryOf(::OnNewPeriodSelectedActionProcessor)
 
     // Use Cases
     factoryOf(::InitUseCase)
     factoryOf(::EraseUserUseCase)
+    factoryOf(::NewPeriodSelectedUseCase)
 
     // Repositories
     singleOf(::MovementRepositoryImpl) { bind<MovementRepository>() }

@@ -5,6 +5,8 @@ import com.daniel.base.domain.usecase.FlowUseCase
 import com.daniel.budgetplanner.dashboard.data.utils.toPresentationMovements
 import com.daniel.budgetplanner.dashboard.domain.repositories.MovementRepository
 import com.daniel.budgetplanner.dashboard.domain.usecases.model.InitUseCaseResult
+import com.daniel.budgetplanner.dashboard.utils.LOADING_DELAY
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
@@ -15,6 +17,8 @@ class InitUseCase(
     val movementDbRepository: MovementRepository
 ) : FlowUseCase<Unit, InitUseCaseResult, Nothing>() {
     override suspend fun executeOnBackground(params: Unit): Flow<InitUseCaseResult> {
+        delay(LOADING_DELAY)
+
         val user = storageRepository.getUser()
         val startDate = storageRepository.getStartDate()
         val endDate = storageRepository.getEndData()

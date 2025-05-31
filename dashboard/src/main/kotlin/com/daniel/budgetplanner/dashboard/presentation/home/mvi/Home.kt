@@ -6,6 +6,7 @@ import com.daniel.base.presentation.ViewState
 import com.daniel.budgetplanner.dashboard.domain.model.DashboardBalances
 import com.daniel.budgetplanner.dashboard.domain.model.PresentationMovements
 import com.daniel.budgetplanner.dashboard.utils.ALL_CATEGORIES
+import java.time.LocalDate
 
 object Home {
     sealed class State : ViewState() {
@@ -55,6 +56,11 @@ object Home {
 
         data class FilterCategorySelection(val category: String) : Action()
 
+        data class OnNewPeriodSelected(
+            val startDate: LocalDate?,
+            val endDate: LocalDate?
+        ) : Action()
+
         data class OnSwipeDelete(val position: Int) : Action()
 
         data object ConfirmEraseUser : Action()
@@ -72,5 +78,7 @@ object Home {
         data object NavigateToPolicyDialog : Effect()
 
         data object NavigateToGetStarted : Effect()
+
+        data object NavigateToHomeInit : Effect()
     }
 }

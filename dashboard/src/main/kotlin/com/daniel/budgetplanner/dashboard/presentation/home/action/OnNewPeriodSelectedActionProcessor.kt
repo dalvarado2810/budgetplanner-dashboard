@@ -3,7 +3,8 @@ package com.daniel.budgetplanner.dashboard.presentation.home.action
 import com.daniel.base.domain.usecase.UseCaseState
 import com.daniel.base.presentation.Mutation
 import com.daniel.base.presentation.action.ActionProcessor
-import com.daniel.budgetplanner.dashboard.domain.usecases.EraseUserUseCase
+import com.daniel.budgetplanner.dashboard.domain.usecases.NewPeriodSelectedUseCase
+import com.daniel.budgetplanner.dashboard.domain.usecases.params.NewPeriodParams
 import com.daniel.budgetplanner.dashboard.presentation.home.mvi.Home
 import com.daniel.budgetplanner.dashboard.utils.EFFECT_DELAY
 import kotlinx.coroutines.CoroutineScope
@@ -13,28 +14,32 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
-class OnConfirmEraseUserActionProcessor(
-    val eraseUserUseCase: EraseUserUseCase
-) : ActionProcessor<Home.State, Home.Action.ConfirmEraseUser, Home.Effect>() {
+class OnNewPeriodSelectedActionProcessor(
+    private val newPeriodSelectedUseCase: NewPeriodSelectedUseCase
+) : ActionProcessor<Home.State, Home.Action.OnNewPeriodSelected, Home.Effect>() {
     override fun process(
-        action: Home.Action.ConfirmEraseUser,
+        action: Home.Action.OnNewPeriodSelected,
         sideEffect: (Home.Effect) -> Unit
     ): Flow<Mutation<Home.State>> {
-        return eraseUserUseCase.execute(Unit).map { useCaseState ->
-            when(useCaseState){
+        return newPeriodSelectedUseCase.execute(
+            params = NewPeriodParams(
+                startDate = action.startDate,
+                endDate = action.endDate
+            )
+        ).map { useCaseState ->
+            when(useCaseState) {
                 is UseCaseState.Data -> { currentState ->
                     currentState as Home.State.Content
                     CoroutineScope(Dispatchers.IO).launch {
                         delay(EFFECT_DELAY)
-                        sideEffect(Home.Effect.NavigateToGetStarted)
+                        sideEffect(Home.Effect.NavigateToHomeInit)
                     }
-
                     currentState.copy(
-                        isChangeUserDialogShown = false
+                        isDatePickerShown = false
                     )
                 }
-                is UseCaseState.Error -> { currentState ->
-                    currentState
+                is UseCaseState.Error -> { _ ->
+                    Home.State.Error
                 }
                 is UseCaseState.Loading -> { currentState ->
                     currentState
