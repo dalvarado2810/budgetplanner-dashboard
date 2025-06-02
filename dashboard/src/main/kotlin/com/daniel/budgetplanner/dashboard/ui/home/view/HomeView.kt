@@ -22,6 +22,7 @@ import com.daniel.budgetplanner.dashboard.ui.home.components.BalanceInformationC
 import com.daniel.budgetplanner.dashboard.ui.home.components.ConfirmationDialog
 import com.daniel.budgetplanner.dashboard.ui.home.components.HomeTopRow
 import com.daniel.budgetplanner.dashboard.ui.home.components.MovementsButtonRowComponent
+import com.daniel.budgetplanner.dashboard.ui.home.components.MovementsDetailsComponent
 import com.daniel.budgetplanner.dashboard.ui.home.components.MyDateRangePickerDialog
 import com.daniel.budgetplanner.dashboard.ui.home.components.PolicyDialog
 import java.time.LocalDate
@@ -41,7 +42,10 @@ fun HomeView(
     onChangeUserConfirmation: () -> Unit,
     onChangeUserDialogDismiss: () -> Unit,
     onIncomeButtonClick: () -> Unit,
-    onExpenseButtonClick: () -> Unit
+    onExpenseButtonClick: () -> Unit,
+    onFilterMenuClick: () -> Unit,
+    onFilterMenuDismiss: () -> Unit,
+    onFilterCategorySelected: (String) -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -76,6 +80,15 @@ fun HomeView(
             MovementsButtonRowComponent(
                 onIncomeButtonClick = onIncomeButtonClick,
                 onExpenseButtonClick = onExpenseButtonClick
+            )
+
+            MovementsDetailsComponent(
+                dates = state.rangeDates,
+                movementsList = state.movements,
+                isFilterCategoryMenuExpanded = state.isFilterShown,
+                onFilterCategoryClick = onFilterMenuClick,
+                onFilterCategoryMenuDismiss = onFilterMenuDismiss,
+                onCategorySelected = onFilterCategorySelected
             )
         }
 
@@ -122,10 +135,46 @@ fun DashboardViewPreview() {
             ),
             movements = listOf(
                 MovementItem(
+                    name = "Gasto comun apartamento daniel casa",
+                    category = Category.SERVICES_EXPENSES,
+                    date = "12/05/2025",
+                    amount = "120000000"
+                ),
+                MovementItem(
                     name = "Gasto comun apartamento",
                     category = Category.SERVICES_EXPENSES,
                     date = "12/05/2025",
-                    amount = "120000"
+                    amount = "120000000"
+                ),
+                MovementItem(
+                    name = "Gasto comun apartamento",
+                    category = Category.SERVICES_EXPENSES,
+                    date = "12/05/2025",
+                    amount = "120000000"
+                ),
+                MovementItem(
+                    name = "Gasto comun apartamento",
+                    category = Category.SERVICES_EXPENSES,
+                    date = "12/05/2025",
+                    amount = "120000000"
+                ),
+                MovementItem(
+                    name = "Gasto comun apartamento",
+                    category = Category.SERVICES_EXPENSES,
+                    date = "12/05/2025",
+                    amount = "120000000"
+                ),
+                MovementItem(
+                    name = "Gasto comun apartamento",
+                    category = Category.SERVICES_EXPENSES,
+                    date = "12/05/2025",
+                    amount = "120000000"
+                ),
+                MovementItem(
+                    name = "Gasto comun apartamento",
+                    category = Category.SERVICES_EXPENSES,
+                    date = "12/05/2025",
+                    amount = "120000000"
                 )
             ),
             rangeDates = Pair("12/05/2025", "12/06/2025"),
@@ -149,6 +198,9 @@ fun DashboardViewPreview() {
         onChangeUserConfirmation = {},
         onChangeUserDialogDismiss = {},
         onIncomeButtonClick = {},
-        onExpenseButtonClick = {}
+        onExpenseButtonClick = {},
+        onFilterMenuClick = {},
+        onFilterMenuDismiss = {},
+        onFilterCategorySelected = {}
     )
 }

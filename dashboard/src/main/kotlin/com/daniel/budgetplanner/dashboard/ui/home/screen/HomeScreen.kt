@@ -21,7 +21,10 @@ fun HomeScreen(
     onChangeUserConfirmation: () -> Unit,
     onChangeUserDialogDismiss: () -> Unit,
     onIncomeButtonClick: () -> Unit,
-    onExpenseButtonClick: () -> Unit
+    onExpenseButtonClick: () -> Unit,
+    onFilterMenuClick: () -> Unit,
+    onFilterMenuDismiss: () -> Unit,
+    onFilterCategorySelected: (String) -> Unit
 ) {
     when (state) {
         is Home.State.Content -> {
@@ -39,7 +42,10 @@ fun HomeScreen(
                 onChangeUserDialogDismiss = onChangeUserDialogDismiss,
                 onChangeUserConfirmation = onChangeUserConfirmation,
                 onIncomeButtonClick = onIncomeButtonClick,
-                onExpenseButtonClick = onExpenseButtonClick
+                onExpenseButtonClick = onExpenseButtonClick,
+                onFilterMenuClick = onFilterMenuClick,
+                onFilterMenuDismiss = onFilterMenuDismiss,
+                onFilterCategorySelected = onFilterCategorySelected
             )
         }
         is Home.State.Error -> {}

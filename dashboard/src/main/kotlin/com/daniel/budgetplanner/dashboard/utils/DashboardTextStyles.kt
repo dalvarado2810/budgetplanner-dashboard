@@ -14,10 +14,23 @@ object DashboardTextStyles {
         fontWeight = FontWeight.Bold
     )
 
+    val text10spMedium = TextStyle(
+        fontSize = 10.sp,
+        fontWeight = FontWeight.Medium,
+        fontFamily = fonts
+    )
+
     val text12spBold = TextStyle(
         fontSize = 12.sp,
         fontWeight = FontWeight.Bold,
         fontFamily = fonts
+    )
+
+    val text12spBoldRegular = TextStyle(
+        fontSize = 12.sp,
+        fontWeight = FontWeight.Bold,
+        fontFamily = fonts,
+        lineHeight = 14.sp
     )
 
     val text12spBlack = TextStyle(
@@ -71,5 +84,23 @@ object DashboardTextStyles {
         fontSize = 22.sp,
         textAlign = TextAlign.Center,
         color = Color.Black
+    )
+
+    val text14spMediumBlack = TextStyle(
+        fontSize = 14.sp,
+        fontWeight = FontWeight.Medium,
+        color = Color.Black
+    )
+
+    val textAlign22spBold = TextStyle(
+        fontSize = 20.sp,
+        fontWeight = FontWeight.Bold,
+        textAlign = TextAlign.Center
+    )
+
+    val text16spBoldStart = TextStyle(
+        fontSize = 16.sp,
+        fontWeight = FontWeight.Bold,
+        textAlign = TextAlign.Start
     )
 }

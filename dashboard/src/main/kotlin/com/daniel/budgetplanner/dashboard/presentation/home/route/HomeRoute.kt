@@ -47,7 +47,10 @@ fun HomeRoute(
         onChangeUserConfirmation = viewModel::onConfirmEraseUserAction,
         onChangeUserDialogDismiss = viewModel::onCancelEraseUserAction,
         onIncomeButtonClick = {},
-        onExpenseButtonClick = {}
+        onExpenseButtonClick = {},
+        onFilterMenuClick = {},
+        onFilterMenuDismiss = {},
+        onFilterCategorySelected = {}
     )
 
 }
