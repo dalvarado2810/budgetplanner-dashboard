@@ -84,6 +84,7 @@ fun HomeView(
 
             MovementsDetailsComponent(
                 dates = state.rangeDates,
+                categorySelected = state.categorySelected,
                 movementsList = state.movements,
                 isFilterCategoryMenuExpanded = state.isFilterShown,
                 onFilterCategoryClick = onFilterMenuClick,
@@ -141,16 +142,16 @@ fun DashboardViewPreview() {
                     amount = "120000000"
                 ),
                 MovementItem(
-                    name = "Gasto comun apartamento",
-                    category = Category.SERVICES_EXPENSES,
-                    date = "12/05/2025",
-                    amount = "120000000"
+                    name = "Ingreso sueldo",
+                    category = Category.MONTHLY_INCOMES,
+                    date = "19/05/2025",
+                    amount = "190000"
                 ),
                 MovementItem(
-                    name = "Gasto comun apartamento",
-                    category = Category.SERVICES_EXPENSES,
-                    date = "12/05/2025",
-                    amount = "120000000"
+                    name = "GASOLINA",
+                    category = Category.TRANSPORTATION_EXPENSES,
+                    date = "18/05/2025",
+                    amount = "34500"
                 ),
                 MovementItem(
                     name = "Gasto comun apartamento",
@@ -178,7 +179,7 @@ fun DashboardViewPreview() {
                 )
             ),
             rangeDates = Pair("12/05/2025", "12/06/2025"),
-            categorySelected = Category.SERVICES_EXPENSES.value,
+            categorySelected = Category.OTHER_INCOMES.value,
             isDatePickerShown = false,
             isPolicyDialogShown = false,
             isMenuShown = false,

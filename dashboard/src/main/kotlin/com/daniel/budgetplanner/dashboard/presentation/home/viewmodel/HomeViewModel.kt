@@ -3,12 +3,15 @@ package com.daniel.budgetplanner.dashboard.presentation.home.viewmodel
 import com.daniel.base.presentation.Mutation
 import com.daniel.base.presentation.viewmodel.BaseViewModel
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnCancelEraseUserActionProcessor
+import com.daniel.budgetplanner.dashboard.presentation.home.action.OnCategorySelectedActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnInitActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnMenuDismissActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnClickMenuActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnConfirmEraseUserActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnDatePickerDismissActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnEraseUserMenuSelectionActionProcessor
+import com.daniel.budgetplanner.dashboard.presentation.home.action.OnFilterButtonClickActionProcessor
+import com.daniel.budgetplanner.dashboard.presentation.home.action.OnFilterMenuDismissActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnNewPeriodMenuSelectionActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnNewPeriodSelectedActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnPolicyClickActionProcessor
@@ -30,7 +33,10 @@ class HomeViewModel(
     val onEraseUserMenuSelectionActionProcessor: OnEraseUserMenuSelectionActionProcessor,
     val onConfirmEraseUserActionProcessor: OnConfirmEraseUserActionProcessor,
     val onCancelEraseUserActionProcessor: OnCancelEraseUserActionProcessor,
-    val onNewPeriodSelectedActionProcessor: OnNewPeriodSelectedActionProcessor
+    val onNewPeriodSelectedActionProcessor: OnNewPeriodSelectedActionProcessor,
+    val onFilterButtonClickActionProcessor: OnFilterButtonClickActionProcessor,
+    val onFilterMenuDismissActionProcessor: OnFilterMenuDismissActionProcessor,
+    val onCategorySelectedActionProcessor: OnCategorySelectedActionProcessor
 ) : BaseViewModel<Home.State, Home.Action, Home.Effect>(
     initialState = Home.State.Loading,
     initialAction = Home.Action.Init
@@ -82,6 +88,18 @@ class HomeViewModel(
         sendAction(Home.Action.OnNewPeriodSelected(startDate, endDate))
     }
 
+    fun onFilterButtonClickAction() {
+        sendAction(Home.Action.FilterButtonClick)
+    }
+
+    fun onFilterMenuDismissAction() {
+        sendAction(Home.Action.FilterMenuDismiss)
+    }
+
+    fun onCategorySelectedAction(category: String){
+        sendAction(Home.Action.FilterCategorySelection(category))
+    }
+
     fun onIncomeButtonClickAction() {
         sendAction(Home.Action.IncomeButtonClick)
     }
@@ -107,8 +125,15 @@ class HomeViewModel(
             is Home.Action.OnNewPeriodSelected -> {
                 onNewPeriodSelectedActionProcessor.process(action, sideEffect)
             }
-            is Home.Action.FilterButtonClick -> TODO()
-            is Home.Action.FilterCategorySelection -> TODO()
+            is Home.Action.FilterButtonClick -> {
+                onFilterButtonClickActionProcessor.process(action, sideEffect)
+            }
+            is Home.Action.FilterMenuDismiss -> {
+                onFilterMenuDismissActionProcessor.process(action, sideEffect)
+            }
+            is Home.Action.FilterCategorySelection -> {
+                onCategorySelectedActionProcessor.process(action, sideEffect)
+            }
             is Home.Action.Init -> {
                 onInitActionProcessor.process(action, sideEffect)
             }
@@ -121,7 +146,6 @@ class HomeViewModel(
             is Home.Action.NewPeriodMenuSelection -> {
                 onNewPeriodMenuSelectionActionProcessor.process(action, sideEffect)
             }
-            is Home.Action.OnSwipeDelete -> TODO()
             is Home.Action.PolicyMenuSelection -> {
                 onPolicyClickActionProcessor.process(action, sideEffect)
             }
@@ -136,6 +160,8 @@ class HomeViewModel(
             }
             is Home.Action.ExpenseButtonClick -> TODO()
             is Home.Action.IncomeButtonClick -> TODO()
+            is Home.Action.OnSwipeDelete -> TODO()
+            is Home.Action.OnSwipeModify -> TODO()
         }
     }
 }

@@ -21,7 +21,7 @@ import com.daniel.budgetplanner.dashboard.utils.IMAGE_NO_MOVEMENTS
 fun EmptyStateComponent(
     isCategoryEmptyState: Boolean = false,
 ) {
-    val textResource = if (isCategoryEmptyState) {
+    val textResource = if (!isCategoryEmptyState) {
         R.string.no_movements_add
     } else {
         R.string.no_categories_movements_add

@@ -8,6 +8,7 @@ import com.daniel.budgetplanner.dashboard.domain.usecases.EraseUserUseCase
 import com.daniel.budgetplanner.dashboard.domain.usecases.InitUseCase
 import com.daniel.budgetplanner.dashboard.domain.usecases.NewPeriodSelectedUseCase
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnCancelEraseUserActionProcessor
+import com.daniel.budgetplanner.dashboard.presentation.home.action.OnCategorySelectedActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnInitActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnMenuDismissActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnNewPeriodMenuSelectionActionProcessor
@@ -15,6 +16,8 @@ import com.daniel.budgetplanner.dashboard.presentation.home.action.OnClickMenuAc
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnConfirmEraseUserActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnDatePickerDismissActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnEraseUserMenuSelectionActionProcessor
+import com.daniel.budgetplanner.dashboard.presentation.home.action.OnFilterButtonClickActionProcessor
+import com.daniel.budgetplanner.dashboard.presentation.home.action.OnFilterMenuDismissActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnNewPeriodSelectedActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnPolicyClickActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnPolicyDialogDismissActionProcessor
@@ -46,6 +49,9 @@ val dashboardModule = module {
     factoryOf(::OnConfirmEraseUserActionProcessor)
     factoryOf(::OnCancelEraseUserActionProcessor)
     factoryOf(::OnNewPeriodSelectedActionProcessor)
+    factoryOf(::OnFilterButtonClickActionProcessor)
+    factoryOf(::OnFilterMenuDismissActionProcessor)
+    factoryOf(::OnCategorySelectedActionProcessor)
 
     // Use Cases
     factoryOf(::InitUseCase)

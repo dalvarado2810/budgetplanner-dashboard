@@ -54,6 +54,8 @@ object Home {
 
         data object FilterButtonClick : Action()
 
+        data object FilterMenuDismiss : Action()
+
         data class FilterCategorySelection(val category: String) : Action()
 
         data class OnNewPeriodSelected(
@@ -62,6 +64,8 @@ object Home {
         ) : Action()
 
         data class OnSwipeDelete(val position: Int) : Action()
+
+        data class OnSwipeModify(val position: Int) : Action()
 
         data object ConfirmEraseUser : Action()
 
@@ -72,10 +76,6 @@ object Home {
         data object NavigateToIncomeDialog : Effect()
 
         data object NavigateToExpenseDialog : Effect()
-
-        data object NavigateToDatePicker : Effect()
-
-        data object NavigateToPolicyDialog : Effect()
 
         data object NavigateToGetStarted : Effect()
 

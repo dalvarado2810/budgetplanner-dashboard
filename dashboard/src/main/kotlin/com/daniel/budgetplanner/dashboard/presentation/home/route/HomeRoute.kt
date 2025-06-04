@@ -19,10 +19,8 @@ fun HomeRoute(
 
     CollectEffectWithLifecycle(flow = viewModel.effect) { effect ->
         when (effect) {
-            is Home.Effect.NavigateToDatePicker -> TODO()
             is Home.Effect.NavigateToExpenseDialog -> TODO()
             is Home.Effect.NavigateToIncomeDialog -> TODO()
-            is Home.Effect.NavigateToPolicyDialog -> TODO()
             is Home.Effect.NavigateToGetStarted -> navigateToGetStarted()
             is Home.Effect.NavigateToHomeInit -> navigateToHomeInit()
         }
@@ -48,9 +46,9 @@ fun HomeRoute(
         onChangeUserDialogDismiss = viewModel::onCancelEraseUserAction,
         onIncomeButtonClick = {},
         onExpenseButtonClick = {},
-        onFilterMenuClick = {},
-        onFilterMenuDismiss = {},
-        onFilterCategorySelected = {}
+        onFilterMenuClick = viewModel::onFilterButtonClickAction,
+        onFilterMenuDismiss = viewModel::onFilterMenuDismissAction,
+        onFilterCategorySelected = viewModel::onCategorySelectedAction
     )
 
 }

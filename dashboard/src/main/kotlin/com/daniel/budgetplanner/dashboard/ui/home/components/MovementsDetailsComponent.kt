@@ -13,11 +13,10 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -31,15 +30,15 @@ import com.daniel.budgetplanner.dashboard.R
 import com.daniel.budgetplanner.dashboard.domain.model.Category
 import com.daniel.budgetplanner.dashboard.domain.model.PresentationMovements
 import com.daniel.budgetplanner.dashboard.presentation.home.model.MovementItem
+import com.daniel.budgetplanner.dashboard.utils.ALL_CATEGORIES
 import com.daniel.budgetplanner.dashboard.utils.GO_TO_TOP_IMAGE
 import com.daniel.budgetplanner.dashboard.utils.WEIGHT_ONE
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @Composable
 fun MovementsDetailsComponent(
     dates: Pair<String, String>,
+    categorySelected: String,
     movementsList: PresentationMovements,
     isFilterCategoryMenuExpanded: Boolean,
     onFilterCategoryClick: () -> Unit,
@@ -47,8 +46,7 @@ fun MovementsDetailsComponent(
     onCategorySelected: (String) -> Unit
 ) {
     val comparator = Comparator<MovementItem> { a, b -> a.date.compareTo(b.date) }
-    val categorySelected: MutableState<String?> = remember { mutableStateOf(null) }
-    val coroutineScope = CoroutineScope(Dispatchers.IO)
+    val coroutineScope = rememberCoroutineScope()
     val listState = rememberLazyListState()
     val isGoToTopEnabled by remember {
         derivedStateOf { listState.firstVisibleItemIndex > 0 }
@@ -81,8 +79,8 @@ fun MovementsDetailsComponent(
             } else {
                 val filteredList = movementsList
                     .filter {
-                        categorySelected.value == null ||
-                                it.category.value == categorySelected.value
+                        categorySelected == ALL_CATEGORIES ||
+                        it.category.value == categorySelected
                     }
                     .sortedWith(comparator)
                 if (filteredList.isEmpty()) {
@@ -90,7 +88,8 @@ fun MovementsDetailsComponent(
                 } else {
                     LazyColumn(
                         modifier = Modifier
-                            .fillMaxWidth()
+                            .fillMaxWidth(),
+                        state = listState
                     ) {
                         items(
                            filteredList
@@ -105,7 +104,7 @@ fun MovementsDetailsComponent(
         TextButton(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(dimensionResource(R.dimen.dimen_48dp))
+                .height(dimensionResource(R.dimen.dimen_40dp))
                 .semantics {
                     contentDescription = GO_TO_TOP_IMAGE
                 },
@@ -142,16 +141,17 @@ fun MovementsDetailsComponent(
 fun MovementsDetailsComponentPreview() {
     MovementsDetailsComponent(
         dates = Pair("2025-05-31", "2025-06-30"),
+        categorySelected = "Todas las Categorías",
         movementsList = listOf(
             MovementItem(
-               name = "ingreso sueldo",
+                name = "ingreso sueldo",
                 category = Category.MONTHLY_INCOMES,
                 amount = "1500000",
                 date = "2025-05-31"
             ),
             MovementItem(
                 name = "ingreso varios",
-                category = Category.OTHER_INCOMES,
+                category = Category.FOOD_EXPENSES,
                 amount = "200000",
                 date = "2025-05-31"
             ),
@@ -162,7 +162,7 @@ fun MovementsDetailsComponentPreview() {
                 date = "2025-05-31"
             )
         ),
-        isFilterCategoryMenuExpanded = true,
+        isFilterCategoryMenuExpanded = false,
         onFilterCategoryClick = {},
         onFilterCategoryMenuDismiss = {},
         onCategorySelected = {}
