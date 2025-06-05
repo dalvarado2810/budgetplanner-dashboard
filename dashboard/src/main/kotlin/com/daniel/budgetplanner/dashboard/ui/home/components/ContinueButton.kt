@@ -22,6 +22,7 @@ import com.daniel.budgetplanner.dashboard.R
 @Composable
 fun ContinueButton(
     text: String,
+    color: Color = BudgetGreen,
     enabled: Boolean = true,
     onButtonClick: () -> Unit
 ) {
@@ -33,7 +34,7 @@ fun ContinueButton(
         shape = RoundedCornerShape(corner = CornerSize(dimensionResource(R.dimen.dimen_8dp))),
         colors = ButtonDefaults.buttonColors(
             contentColor = Color.Black,
-            containerColor = BudgetGreen,
+            containerColor = color,
             disabledContainerColor = Color.LightGray,
         ),
         modifier = Modifier
@@ -62,6 +63,7 @@ fun ContinueButton(
 fun ContinueButtonPreview(){
     ContinueButton(
         text = "Continuar",
-        onButtonClick = {}
+        onButtonClick = {},
+        color = BudgetGreen
     )
 }

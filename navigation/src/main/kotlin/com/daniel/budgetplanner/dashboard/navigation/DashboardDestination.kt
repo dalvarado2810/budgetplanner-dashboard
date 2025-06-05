@@ -10,4 +10,9 @@ sealed class DashboardDestination : Destination() {
 
     @Serializable
     data object Home : DashboardDestination()
+
+    @Serializable
+    data class MovementDialog(
+        val movementOperation: String
+    ) : DashboardDestination()
 }

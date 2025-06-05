@@ -77,6 +77,8 @@ val categories = listOf(
     "Ingresos varios"
 )
 
+fun LocalDate.toViewPattern(): String = format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+
 fun Category.toPainterResource() = when (this) {
     Category.FOOD_EXPENSES -> R.drawable.ic_grocery_store
     Category.ANT_EXPENSES -> R.drawable.ic_edc_machine

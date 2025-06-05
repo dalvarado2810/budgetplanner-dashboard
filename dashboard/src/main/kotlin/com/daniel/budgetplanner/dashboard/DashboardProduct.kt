@@ -3,11 +3,16 @@ package com.daniel.budgetplanner.dashboard
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.dialog
 import androidx.navigation.navigation
+import androidx.navigation.toRoute
 import com.daniel.base.Product
 import com.daniel.budgetplanner.dashboard.di.dashboardModule
 import com.daniel.budgetplanner.dashboard.navigation.DashboardDestination
 import com.daniel.budgetplanner.dashboard.presentation.home.route.HomeRoute
+import com.daniel.budgetplanner.dashboard.presentation.movementdialog.route.MovementDialogRoute
+import com.daniel.budgetplanner.dashboard.utils.EXPENSE
+import com.daniel.budgetplanner.dashboard.utils.INCOME
 import com.daniel.budgetplanner.onboarding.navigation.OnboardingDestination
 import org.koin.core.module.Module
 
@@ -21,6 +26,23 @@ object DashboardProduct : Product() {
                             navController.navigate(OnboardingDestination.GetStarted)
                         },
                         navigateToHomeInit = {
+                            navController.navigate(DashboardDestination.NavGraph)
+                        },
+                        navigateToIncomeDialog = {
+                            navController.navigate(DashboardDestination.MovementDialog(INCOME))
+                        },
+                        navigateToExpenseDialog = {
+                            navController.navigate(DashboardDestination.MovementDialog(EXPENSE))
+                        }
+                    )
+                }
+
+                dialog<DashboardDestination.MovementDialog> { backStackEntry ->
+                    val args = backStackEntry.toRoute<DashboardDestination.MovementDialog>()
+
+                    MovementDialogRoute(
+                        movementOperation = args.movementOperation,
+                        navigateBackToHome = {
                             navController.navigate(DashboardDestination.NavGraph)
                         }
                     )

@@ -103,4 +103,23 @@ object DashboardTextStyles {
         fontWeight = FontWeight.Bold,
         textAlign = TextAlign.Start
     )
+
+    val text18spBoldBlack = TextStyle(
+        fontSize = 18.sp,
+        fontWeight = FontWeight.Bold,
+        color = Color.Black
+    )
+
+    val text18spBoldAlign = TextStyle(
+        fontSize = 18.sp,
+        fontFamily = fonts,
+        fontWeight = FontWeight.Bold,
+        textAlign = TextAlign.Center
+    )
+
+    val text20spBoldAlign = TextStyle(
+        fontSize = 20.sp,
+        fontWeight = FontWeight.Bold,
+        textAlign = TextAlign.Center
+    )
 }

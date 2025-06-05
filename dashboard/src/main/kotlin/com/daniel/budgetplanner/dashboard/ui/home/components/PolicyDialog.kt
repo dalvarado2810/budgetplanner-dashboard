@@ -102,9 +102,9 @@ fun PolicyDialog (
             Spacer(modifier = Modifier.height(16.dp))
 
             ContinueButton(
-                text = stringResource(id = R.string.get_started_exit)) {
-                onDismiss()
-            }
+                text = stringResource(id = R.string.get_started_exit),
+                onButtonClick = onDismiss
+            )
         }
     }
 }

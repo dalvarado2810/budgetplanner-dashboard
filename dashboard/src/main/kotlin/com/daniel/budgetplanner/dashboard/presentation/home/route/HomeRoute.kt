@@ -13,14 +13,16 @@ import org.koin.androidx.compose.koinViewModel
 fun HomeRoute(
     viewModel: HomeViewModel = koinViewModel(),
     navigateToGetStarted: () -> Unit,
-    navigateToHomeInit: () -> Unit
+    navigateToHomeInit: () -> Unit,
+    navigateToIncomeDialog: () -> Unit,
+    navigateToExpenseDialog: () -> Unit
 ) {
     val viewState by viewModel.state.collectAsStateWithLifecycle()
 
     CollectEffectWithLifecycle(flow = viewModel.effect) { effect ->
         when (effect) {
-            is Home.Effect.NavigateToExpenseDialog -> TODO()
-            is Home.Effect.NavigateToIncomeDialog -> TODO()
+            is Home.Effect.NavigateToExpenseDialog -> navigateToExpenseDialog()
+            is Home.Effect.NavigateToIncomeDialog -> navigateToIncomeDialog()
             is Home.Effect.NavigateToGetStarted -> navigateToGetStarted()
             is Home.Effect.NavigateToHomeInit -> navigateToHomeInit()
         }
@@ -44,8 +46,8 @@ fun HomeRoute(
         },
         onChangeUserConfirmation = viewModel::onConfirmEraseUserAction,
         onChangeUserDialogDismiss = viewModel::onCancelEraseUserAction,
-        onIncomeButtonClick = {},
-        onExpenseButtonClick = {},
+        onIncomeButtonClick = viewModel::onIncomeButtonClickAction,
+        onExpenseButtonClick = viewModel::onExpenseButtonClickAction,
         onFilterMenuClick = viewModel::onFilterButtonClickAction,
         onFilterMenuDismiss = viewModel::onFilterMenuDismissAction,
         onFilterCategorySelected = viewModel::onCategorySelectedAction

@@ -10,8 +10,10 @@ import com.daniel.budgetplanner.dashboard.presentation.home.action.OnClickMenuAc
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnConfirmEraseUserActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnDatePickerDismissActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnEraseUserMenuSelectionActionProcessor
+import com.daniel.budgetplanner.dashboard.presentation.home.action.OnExpenseButtonClickActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnFilterButtonClickActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnFilterMenuDismissActionProcessor
+import com.daniel.budgetplanner.dashboard.presentation.home.action.OnIncomeButtonClickActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnNewPeriodMenuSelectionActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnNewPeriodSelectedActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnPolicyClickActionProcessor
@@ -36,7 +38,9 @@ class HomeViewModel(
     val onNewPeriodSelectedActionProcessor: OnNewPeriodSelectedActionProcessor,
     val onFilterButtonClickActionProcessor: OnFilterButtonClickActionProcessor,
     val onFilterMenuDismissActionProcessor: OnFilterMenuDismissActionProcessor,
-    val onCategorySelectedActionProcessor: OnCategorySelectedActionProcessor
+    val onCategorySelectedActionProcessor: OnCategorySelectedActionProcessor,
+    val onIncomeButtonClickActionProcessor: OnIncomeButtonClickActionProcessor,
+    val onExpenseButtonClickActionProcessor: OnExpenseButtonClickActionProcessor
 ) : BaseViewModel<Home.State, Home.Action, Home.Effect>(
     initialState = Home.State.Loading,
     initialAction = Home.Action.Init
@@ -158,8 +162,12 @@ class HomeViewModel(
             is Home.Action.PolicyDialogDismiss -> {
                 onPolicyDialogDismissActionProcessor.process(action, sideEffect)
             }
-            is Home.Action.ExpenseButtonClick -> TODO()
-            is Home.Action.IncomeButtonClick -> TODO()
+            is Home.Action.ExpenseButtonClick -> {
+                onExpenseButtonClickActionProcessor.process(action, sideEffect)
+            }
+            is Home.Action.IncomeButtonClick -> {
+                onIncomeButtonClickActionProcessor.process(action, sideEffect)
+            }
             is Home.Action.OnSwipeDelete -> TODO()
             is Home.Action.OnSwipeModify -> TODO()
         }

@@ -16,13 +16,17 @@ import com.daniel.budgetplanner.dashboard.presentation.home.action.OnClickMenuAc
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnConfirmEraseUserActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnDatePickerDismissActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnEraseUserMenuSelectionActionProcessor
+import com.daniel.budgetplanner.dashboard.presentation.home.action.OnExpenseButtonClickActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnFilterButtonClickActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnFilterMenuDismissActionProcessor
+import com.daniel.budgetplanner.dashboard.presentation.home.action.OnIncomeButtonClickActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnNewPeriodSelectedActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnPolicyClickActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnPolicyDialogDismissActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnToggleVisibilityActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.viewmodel.HomeViewModel
+import com.daniel.budgetplanner.dashboard.presentation.movementdialog.action.OnCloseDialogIconClickActionProcessor
+import com.daniel.budgetplanner.dashboard.presentation.movementdialog.viewmodel.MovementDialogViewModel
 import com.daniel.budgetplanner.dashboard.utils.DB_MOVEMENTS
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModelOf
@@ -35,6 +39,7 @@ import kotlin.jvm.java
 val dashboardModule = module {
     // ViewModel
     viewModelOf(::HomeViewModel)
+    viewModelOf(::MovementDialogViewModel)
 
     // Action Processors
     factoryOf(::OnInitActionProcessor)
@@ -52,6 +57,9 @@ val dashboardModule = module {
     factoryOf(::OnFilterButtonClickActionProcessor)
     factoryOf(::OnFilterMenuDismissActionProcessor)
     factoryOf(::OnCategorySelectedActionProcessor)
+    factoryOf(::OnIncomeButtonClickActionProcessor)
+    factoryOf(::OnExpenseButtonClickActionProcessor)
+    factoryOf(::OnCloseDialogIconClickActionProcessor)
 
     // Use Cases
     factoryOf(::InitUseCase)
