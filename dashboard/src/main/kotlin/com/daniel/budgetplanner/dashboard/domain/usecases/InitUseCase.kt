@@ -17,7 +17,6 @@ class InitUseCase(
     val movementDbRepository: MovementRepository
 ) : FlowUseCase<Unit, InitUseCaseResult, Nothing>() {
     override suspend fun executeOnBackground(params: Unit): Flow<InitUseCaseResult> {
-        delay(LOADING_DELAY)
 
         val user = storageRepository.getUser()
         val startDate = storageRepository.getStartDate()
