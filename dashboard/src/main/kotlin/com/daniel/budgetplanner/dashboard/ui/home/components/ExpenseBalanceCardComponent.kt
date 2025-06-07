@@ -14,7 +14,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.daniel.base.ui.theme.OnboardingBackground
 import com.daniel.budgetplanner.dashboard.R
@@ -24,6 +23,7 @@ import com.daniel.budgetplanner.dashboard.utils.toFormattedAmount
 
 @Composable
 fun ExpenseBalanceCardComponent(
+    title: String,
     expenseBalance: Int,
     isBalanceVisible: Boolean
 ) {
@@ -49,7 +49,7 @@ fun ExpenseBalanceCardComponent(
                     top = dimensionResource(R.dimen.dimen_4dp),
                     bottom = dimensionResource(R.dimen.dimen_4dp)
                 ),
-                text = stringResource(id = R.string.food_balance),
+                text = title,
                 color = Color.Black,
                 style = DashboardTextStyles.text10spBold
             )
@@ -68,6 +68,7 @@ fun ExpenseBalanceCardComponent(
 @Composable
 fun PreviewExpenseBalanceCardComponent() {
     ExpenseBalanceCardComponent(
+        title = "Alimentación",
         expenseBalance = 240600,
         isBalanceVisible = true
     )

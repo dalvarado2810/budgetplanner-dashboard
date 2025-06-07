@@ -71,7 +71,7 @@ fun PreviewMovementDialogComponent() {
     MovementDialogView(
         state = MovementDialog.State.Content(
             movementOperation = MovementOperation.INCOME_OPERATION,
-            descriptionText = "",
+            descriptionText = "ingreso",
             amountText = "",
             dateSelected = LocalDate.now(),
             categorySelected = "Ingreso Mensual",

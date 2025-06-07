@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.daniel.budgetplanner.dashboard.R
 import com.daniel.budgetplanner.dashboard.domain.model.DashboardBalances
@@ -29,11 +30,13 @@ fun BalancesStatusBarComponent (
             verticalAlignment = Alignment.CenterVertically
         ) {
             IncomeBalanceCardComponent(
+                title = stringResource(R.string.monthly_income),
                 incomeBalance = balances.monthlyIncomeBalance,
                 isBalanceVisible = isBalanceVisible
             )
 
             IncomeBalanceCardComponent(
+                title = stringResource(R.string.other_income),
                 incomeBalance = balances.otherIncomesBalance,
                 isBalanceVisible = isBalanceVisible
             )
@@ -43,16 +46,19 @@ fun BalancesStatusBarComponent (
             verticalAlignment = Alignment.CenterVertically
         ) {
             ExpenseBalanceCardComponent(
+                title = stringResource(R.string.food_balance),
                 expenseBalance = balances.foodExpensesBalance,
                 isBalanceVisible = isBalanceVisible
             )
 
             ExpenseBalanceCardComponent(
+                title = stringResource(R.string.health_expenses),
                 expenseBalance = balances.healthExpensesBalance,
                 isBalanceVisible = isBalanceVisible
             )
 
             ExpenseBalanceCardComponent(
+                title = stringResource(R.string.service_expenses),
                 expenseBalance = balances.servicesExpensesBalance,
                 isBalanceVisible = isBalanceVisible
             )
@@ -62,16 +68,19 @@ fun BalancesStatusBarComponent (
             verticalAlignment = Alignment.CenterVertically
         ) {
             ExpenseBalanceCardComponent(
+                title = stringResource(R.string.transport_expenses),
                 expenseBalance = balances.transportExpensesBalance,
                 isBalanceVisible = isBalanceVisible
             )
 
             ExpenseBalanceCardComponent(
+                title = stringResource(R.string.outfit_expenses),
                 expenseBalance = balances.outfitExpensesBalance,
                 isBalanceVisible = isBalanceVisible
             )
 
             ExpenseBalanceCardComponent(
+                title = stringResource(R.string.ant_balance),
                 expenseBalance = balances.antExpensesBalance,
                 isBalanceVisible = isBalanceVisible
             )

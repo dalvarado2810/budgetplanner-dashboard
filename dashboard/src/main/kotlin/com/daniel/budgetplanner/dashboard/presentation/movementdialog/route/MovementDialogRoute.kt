@@ -34,15 +34,15 @@ fun MovementDialogRoute(
     MovementDialogScreen(
         state = viewState,
         movementOperation = movementOperation,
-        onDescriptionChange = {},
-        onAmountChange = {},
-        onCategoryPickerClick = {},
-        onCategorySelected = {},
-        onCategoryPickerDismiss = {},
-        onDateChangeIconClick = {},
-        onDateSelected = {},
-        onDatePickerDismiss = {},
-        onCloseIconClick = viewModel::onCloseDialogIconClick,
-        onContinueButtonClick = {}
+        onDescriptionChange = viewModel::onDescriptionChangeAction,
+        onAmountChange = viewModel::onAmountChangeAction,
+        onCategoryPickerClick = viewModel::onCategoryPickerClickAction,
+        onCategorySelected = viewModel::onDialogCategorySelectedAction,
+        onCategoryPickerDismiss = viewModel::onCategoryPickerDismissAction,
+        onDateChangeIconClick = viewModel::onDateChangeIconClickAction,
+        onDateSelected = viewModel::onDateSelectedAction,
+        onDatePickerDismiss = viewModel::onDatePickerDismissAction,
+        onCloseIconClick = viewModel::onCloseDialogIconClickAction,
+        onContinueButtonClick = viewModel::onSaveButtonClickAction
     )
 }

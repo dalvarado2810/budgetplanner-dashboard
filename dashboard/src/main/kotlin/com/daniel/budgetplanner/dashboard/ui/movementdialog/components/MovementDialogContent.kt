@@ -1,12 +1,11 @@
 package com.daniel.budgetplanner.dashboard.ui.movementdialog.components
 
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -18,6 +17,7 @@ import com.daniel.budgetplanner.dashboard.presentation.movementdialog.model.Move
 import com.daniel.budgetplanner.dashboard.presentation.movementdialog.model.MovementOperation
 import com.daniel.budgetplanner.dashboard.presentation.movementdialog.mvi.MovementDialog
 import com.daniel.budgetplanner.dashboard.ui.home.components.ContinueButton
+import com.daniel.budgetplanner.dashboard.utils.DEFAULT_CATEGORY
 import java.time.LocalDate
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
@@ -37,8 +37,10 @@ fun MovementDialogContent(
     onCloseIconClick: () -> Unit
 ) {
     val color = movementOperation.movementColor
-    val descriptionText = remember { mutableStateOf(state.descriptionText) }
-    val amountText = remember { mutableStateOf(state.amountText) }
+    Log.e("state","description = ${state.descriptionText}")
+    Log.e("state","amount = ${state.amountText}")
+    Log.e("state","date = ${state.dateSelected}")
+    Log.e("state","category = ${state.categorySelected}")
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -52,14 +54,14 @@ fun MovementDialogContent(
         )
 
         DescriptionRowComponent(
-            text = descriptionText.value,
+            text = state.descriptionText,
             color = color,
             onDescriptionChange = onDescriptionChange,
             onCloseClick = onCloseIconClick
         )
 
         AmountRowComponent(
-            amountText = amountText.value,
+            text = state.amountText,
             color = color,
             onAmountChange = onAmountChange
         )
@@ -83,10 +85,12 @@ fun MovementDialogContent(
         ContinueButton(
             text = stringResource(id = R.string.save_movement),
             color = color,
-            enabled = state.isContinueButtonEnabled
+            enabled = state.amountText.isNotEmpty() &&
+                    state.descriptionText.isNotEmpty() &&
+                    state.categorySelected != DEFAULT_CATEGORY
         ) {
             val movement = MovementDialogData(
-                movementDescription = descriptionText.value,
+                movementDescription = state.descriptionText,
                 movementAmount = state.amountText,
                 dbMovementType = movementOperation.dbMovementType,
                 movementCategory = state.categorySelected,

@@ -21,6 +21,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -41,6 +43,8 @@ fun DescriptionRowComponent(
     onDescriptionChange: (String) -> Unit,
     onCloseClick: () -> Unit
 ) {
+    val descriptionText = remember { mutableStateOf(text) }
+
     Column(
         modifier = Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.Center,
@@ -85,9 +89,12 @@ fun DescriptionRowComponent(
             border = BorderStroke(dimensionResource(R.dimen.dimen_1dp), Color.Black)
         ) {
             TextField(
-                value = text,
+                value = descriptionText.value,
                 onValueChange = { description ->
-                    if (description.length <= MAX_INPUT) onDescriptionChange(description)
+                    if (description.length <= MAX_INPUT) {
+                        descriptionText.value = description
+                        onDescriptionChange(description)
+                    }
                 },
                 shape = RoundedCornerShape(dimensionResource(R.dimen.dimen_24dp)),
                 colors = TextFieldDefaults.colors(

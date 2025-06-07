@@ -6,7 +6,7 @@ const val SERVICES_EXPENSES = "Servicios"
 const val OUTFIT_EXPENSES = "Vestimenta"
 const val HEALTH_EXPENSES = "Salud"
 const val TRANSPORTATION_EXPENSES = "Transporte"
-const val MONTHLY_INCOMES = "Ingreso Mensual"
+const val MONTHLY_INCOMES = "Ingresos Mensuales"
 const val OTHER_INCOMES = "Ingresos Varios"
 const val DEFAULT_CATEGORY = "Selecciona Categoría"
 const val INCOME = "INGRESO"
@@ -26,7 +26,6 @@ const val IMAGE_MOVEMENTS = "imagen de boton de movimientos"
 const val IMAGE_ICON_MOVEMENT_ITEM = "imagen de icono de movimiento"
 const val EMPTY_STRING = ""
 const val EFFECT_DELAY = 200L
-const val LOADING_DELAY = 500L
 
 const val WEIGHT_ONE = 1f
 const val WEIGHT_TWO = 2f

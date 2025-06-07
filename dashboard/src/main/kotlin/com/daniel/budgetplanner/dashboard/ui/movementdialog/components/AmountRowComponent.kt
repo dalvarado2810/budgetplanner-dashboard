@@ -13,6 +13,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -31,10 +33,12 @@ import com.daniel.budgetplanner.dashboard.utils.ZERO_STRING
 
 @Composable
 fun AmountRowComponent(
-    amountText: String,
+    text: String,
     color: Color,
     onAmountChange: (String) -> Unit
 ) {
+    val amountText = remember { mutableStateOf(text) }
+
     Column(
         modifier = Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.Center,
@@ -51,11 +55,14 @@ fun AmountRowComponent(
             border = BorderStroke(dimensionResource(R.dimen.dimen_1dp), Color.Black)
         ) {
             TextField(
-                value = amountText,
+                value = amountText.value,
                 onValueChange = { amount ->
                     if (amount.length <= MAX_AMOUNT &&
-                        amount.isDigitsOnly() && amount.startsWith(ZERO_STRING)
-                    ) onAmountChange(amount)
+                        amount.isDigitsOnly() && !amount.startsWith(ZERO_STRING)
+                    ) {
+                        amountText.value = amount
+                        onAmountChange(amount)
+                    }
                 },
                 shape = RoundedCornerShape(dimensionResource(R.dimen.dimen_24dp)),
                 colors = TextFieldDefaults.colors(
@@ -82,7 +89,7 @@ fun AmountRowComponent(
 @Composable
 fun PreviewAmountRowComponent() {
     AmountRowComponent(
-        amountText = "1250000",
+        text = "1250000",
         color = ExpensesColor,
         onAmountChange = {}
     )

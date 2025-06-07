@@ -23,6 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.daniel.base.ui.theme.ExpensesColor
 import com.daniel.budgetplanner.dashboard.R
 import com.daniel.budgetplanner.dashboard.presentation.movementdialog.model.MovementOperation
+import com.daniel.budgetplanner.dashboard.utils.DEFAULT_CATEGORY
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -87,14 +88,14 @@ fun CategorySelectionRowComponent(
     }
 }
 
-@Preview(name = "CategorySelectionRowComponent")
+@Preview(showSystemUi = true)
 @Composable
 fun PreviewCategorySelectionRowComponent() {
     CategorySelectionRowComponent(
         color = ExpensesColor,
-        categorySelected = "Alimentación",
+        categorySelected = DEFAULT_CATEGORY,
         categoryList = MovementOperation.EXPENSE_OPERATION.categoryList,
-        isCategoryPickerShown = true,
+        isCategoryPickerShown = false,
         onCategorySelected = {},
         onCategoryPickerClick = {},
         onCategoryPickerDismiss = {}

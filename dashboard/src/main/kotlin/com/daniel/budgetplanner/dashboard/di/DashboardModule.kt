@@ -7,6 +7,7 @@ import com.daniel.budgetplanner.dashboard.domain.repositories.MovementRepository
 import com.daniel.budgetplanner.dashboard.domain.usecases.EraseUserUseCase
 import com.daniel.budgetplanner.dashboard.domain.usecases.InitUseCase
 import com.daniel.budgetplanner.dashboard.domain.usecases.NewPeriodSelectedUseCase
+import com.daniel.budgetplanner.dashboard.domain.usecases.SaveMovementUseCase
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnCancelEraseUserActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnCategorySelectedActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnInitActionProcessor
@@ -25,7 +26,16 @@ import com.daniel.budgetplanner.dashboard.presentation.home.action.OnPolicyClick
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnPolicyDialogDismissActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnToggleVisibilityActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.viewmodel.HomeViewModel
+import com.daniel.budgetplanner.dashboard.presentation.movementdialog.action.OnAmountChangeActionProcessor
+import com.daniel.budgetplanner.dashboard.presentation.movementdialog.action.OnCategoryPickerClickActionProcessor
+import com.daniel.budgetplanner.dashboard.presentation.movementdialog.action.OnCategoryPickerDismissActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.movementdialog.action.OnCloseDialogIconClickActionProcessor
+import com.daniel.budgetplanner.dashboard.presentation.movementdialog.action.OnDateChangeIconClickActionProcessor
+import com.daniel.budgetplanner.dashboard.presentation.movementdialog.action.OnDateSelectedActionProcessor
+import com.daniel.budgetplanner.dashboard.presentation.movementdialog.action.OnDescriptionChangeActionProcessor
+import com.daniel.budgetplanner.dashboard.presentation.movementdialog.action.OnDialogCategorySelectedActionProcessor
+import com.daniel.budgetplanner.dashboard.presentation.movementdialog.action.OnDialogDatePickerDismissActionProcessor
+import com.daniel.budgetplanner.dashboard.presentation.movementdialog.action.OnSaveButtonClickActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.movementdialog.viewmodel.MovementDialogViewModel
 import com.daniel.budgetplanner.dashboard.utils.DB_MOVEMENTS
 import org.koin.android.ext.koin.androidContext
@@ -60,11 +70,21 @@ val dashboardModule = module {
     factoryOf(::OnIncomeButtonClickActionProcessor)
     factoryOf(::OnExpenseButtonClickActionProcessor)
     factoryOf(::OnCloseDialogIconClickActionProcessor)
+    factoryOf(::OnDescriptionChangeActionProcessor)
+    factoryOf(::OnAmountChangeActionProcessor)
+    factoryOf(::OnDateChangeIconClickActionProcessor)
+    factoryOf(::OnDialogDatePickerDismissActionProcessor)
+    factoryOf(::OnDateSelectedActionProcessor)
+    factoryOf(::OnCategoryPickerClickActionProcessor)
+    factoryOf(::OnDialogCategorySelectedActionProcessor)
+    factoryOf(::OnCategoryPickerDismissActionProcessor)
+    factoryOf(::OnSaveButtonClickActionProcessor)
 
     // Use Cases
     factoryOf(::InitUseCase)
     factoryOf(::EraseUserUseCase)
     factoryOf(::NewPeriodSelectedUseCase)
+    factoryOf(::SaveMovementUseCase)
 
     // Repositories
     singleOf(::MovementRepositoryImpl) { bind<MovementRepository>() }
