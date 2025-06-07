@@ -62,7 +62,7 @@ fun MovementListTopComponent(
     }
 }
 
-@Preview(name = "MovementListTopComponent")
+@Preview(showBackground = true)
 @Composable
 fun PreviewMovementListTopComponent() {
     MovementListTopComponent(

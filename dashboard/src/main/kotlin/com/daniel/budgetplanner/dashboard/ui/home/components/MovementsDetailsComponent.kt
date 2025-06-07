@@ -94,7 +94,12 @@ fun MovementsDetailsComponent(
                         items(
                            filteredList
                         ) { item ->
-                            MovementItemComponent(item = item)
+                            SwipeBoxComponent(
+                                onEdit = {},
+                                onDelete = {}
+                            ) {
+                                MovementItemComponent(item = item)
+                            }
                         }
                     }
                 }
@@ -134,9 +139,7 @@ fun MovementsDetailsComponent(
 
 }
 
-@Preview(
-    showBackground = true
-)
+@Preview(showBackground = true)
 @Composable
 fun MovementsDetailsComponentPreview() {
     MovementsDetailsComponent(
