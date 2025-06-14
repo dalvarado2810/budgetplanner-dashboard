@@ -2,6 +2,7 @@ package com.daniel.budgetplanner.dashboard.presentation.home.viewmodel
 
 import com.daniel.base.presentation.Mutation
 import com.daniel.base.presentation.viewmodel.BaseViewModel
+import com.daniel.budgetplanner.dashboard.domain.model.Movement
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnCancelEraseUserActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnCategorySelectedActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnInitActionProcessor
@@ -18,7 +19,9 @@ import com.daniel.budgetplanner.dashboard.presentation.home.action.OnNewPeriodMe
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnNewPeriodSelectedActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnPolicyClickActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnPolicyDialogDismissActionProcessor
+import com.daniel.budgetplanner.dashboard.presentation.home.action.OnSwipeDeleteActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnToggleVisibilityActionProcessor
+import com.daniel.budgetplanner.dashboard.presentation.home.model.DeleteAction
 import com.daniel.budgetplanner.dashboard.presentation.home.mvi.Home
 import kotlinx.coroutines.flow.Flow
 import java.time.LocalDate
@@ -40,7 +43,8 @@ class HomeViewModel(
     val onFilterMenuDismissActionProcessor: OnFilterMenuDismissActionProcessor,
     val onCategorySelectedActionProcessor: OnCategorySelectedActionProcessor,
     val onIncomeButtonClickActionProcessor: OnIncomeButtonClickActionProcessor,
-    val onExpenseButtonClickActionProcessor: OnExpenseButtonClickActionProcessor
+    val onExpenseButtonClickActionProcessor: OnExpenseButtonClickActionProcessor,
+    val onSwipeDeleteActionProcessor: OnSwipeDeleteActionProcessor
 ) : BaseViewModel<Home.State, Home.Action, Home.Effect>(
     initialState = Home.State.Loading,
     initialAction = Home.Action.Init
@@ -112,6 +116,14 @@ class HomeViewModel(
         sendAction(Home.Action.ExpenseButtonClick)
     }
 
+    fun onSwipeEditAction(movement: Movement) {
+        sendAction(Home.Action.OnSwipeEdit(movement))
+    }
+
+    fun onSwipeDeleteAction(movement: DeleteAction) {
+        sendAction(Home.Action.OnSwipeDelete(movement))
+    }
+
     override fun processAction(
         action: Home.Action,
         sideEffect: (Home.Effect) -> Unit
@@ -168,8 +180,10 @@ class HomeViewModel(
             is Home.Action.IncomeButtonClick -> {
                 onIncomeButtonClickActionProcessor.process(action, sideEffect)
             }
-            is Home.Action.OnSwipeDelete -> TODO()
-            is Home.Action.OnSwipeModify -> TODO()
+            is Home.Action.OnSwipeDelete -> {
+                onSwipeDeleteActionProcessor.process(action, sideEffect)
+            }
+            is Home.Action.OnSwipeEdit -> TODO()
         }
     }
 }

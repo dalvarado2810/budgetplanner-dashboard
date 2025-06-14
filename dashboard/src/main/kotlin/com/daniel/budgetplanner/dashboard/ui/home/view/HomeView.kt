@@ -15,7 +15,8 @@ import com.daniel.base.ui.theme.BackGround
 import com.daniel.budgetplanner.dashboard.R
 import com.daniel.budgetplanner.dashboard.domain.model.Category
 import com.daniel.budgetplanner.dashboard.domain.model.DashboardBalances
-import com.daniel.budgetplanner.dashboard.presentation.home.model.MovementItem
+import com.daniel.budgetplanner.dashboard.domain.model.DbMovementType
+import com.daniel.budgetplanner.dashboard.domain.model.Movement
 import com.daniel.budgetplanner.dashboard.presentation.home.mvi.Home
 import com.daniel.budgetplanner.dashboard.ui.home.components.BackgroundCard
 import com.daniel.budgetplanner.dashboard.ui.home.components.BalanceInformationComponent
@@ -25,6 +26,8 @@ import com.daniel.budgetplanner.dashboard.ui.home.components.MovementsButtonRowC
 import com.daniel.budgetplanner.dashboard.ui.home.components.MovementsDetailsComponent
 import com.daniel.budgetplanner.dashboard.ui.home.components.MyDateRangePickerDialog
 import com.daniel.budgetplanner.dashboard.ui.home.components.PolicyDialog
+import com.daniel.budgetplanner.dashboard.utils.MAX_AMOUNT
+import com.daniel.budgetplanner.dashboard.utils.MAX_INPUT
 import java.time.LocalDate
 
 @Composable
@@ -45,7 +48,9 @@ fun HomeView(
     onExpenseButtonClick: () -> Unit,
     onFilterMenuClick: () -> Unit,
     onFilterMenuDismiss: () -> Unit,
-    onFilterCategorySelected: (String) -> Unit
+    onFilterCategorySelected: (String) -> Unit,
+    onEditMovement: (Movement) -> Unit,
+    onDeleteMovement: (Movement) -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -89,7 +94,9 @@ fun HomeView(
                 isFilterCategoryMenuExpanded = state.isFilterShown,
                 onFilterCategoryClick = onFilterMenuClick,
                 onFilterCategoryMenuDismiss = onFilterMenuDismiss,
-                onCategorySelected = onFilterCategorySelected
+                onCategorySelected = onFilterCategorySelected,
+                onEditMovement = onEditMovement,
+                onDeleteMovement = onDeleteMovement
             )
         }
 
@@ -135,47 +142,38 @@ fun DashboardViewPreview() {
                 transportExpensesBalance = 50000
             ),
             movements = listOf(
-                MovementItem(
-                    name = "Gasto comun apartamento daniel casa",
-                    category = Category.SERVICES_EXPENSES,
-                    date = "12/05/2025",
-                    amount = "120000000"
+                Movement(
+                    id = 12,
+                    movementDescription = "Gasto comun apartamento daniel casa",
+                    movementCategory = Category.SERVICES_EXPENSES,
+                    movementAmount = 120000000,
+                    movementUser = "Daniel",
+                    dbMovementType = DbMovementType.EXPENSE,
+                    date = LocalDate.now(),
+                    month = MAX_AMOUNT,
+                    year = MAX_INPUT
                 ),
-                MovementItem(
-                    name = "Ingreso sueldo",
-                    category = Category.MONTHLY_INCOMES,
-                    date = "19/05/2025",
-                    amount = "190000"
+                Movement(
+                    id = 13,
+                    movementDescription = "ingreso sueldo",
+                    movementCategory = Category.MONTHLY_INCOMES,
+                    movementAmount = 1500000,
+                    movementUser = "Daniel",
+                    dbMovementType = DbMovementType.INCOME,
+                    date = LocalDate.now(),
+                    month = 5,
+                    year = 2025
                 ),
-                MovementItem(
-                    name = "GASOLINA",
-                    category = Category.TRANSPORTATION_EXPENSES,
-                    date = "18/05/2025",
-                    amount = "34500"
-                ),
-                MovementItem(
-                    name = "Gasto comun apartamento",
-                    category = Category.SERVICES_EXPENSES,
-                    date = "12/05/2025",
-                    amount = "120000000"
-                ),
-                MovementItem(
-                    name = "Gasto comun apartamento",
-                    category = Category.SERVICES_EXPENSES,
-                    date = "12/05/2025",
-                    amount = "120000000"
-                ),
-                MovementItem(
-                    name = "Gasto comun apartamento",
-                    category = Category.SERVICES_EXPENSES,
-                    date = "12/05/2025",
-                    amount = "120000000"
-                ),
-                MovementItem(
-                    name = "Gasto comun apartamento",
-                    category = Category.SERVICES_EXPENSES,
-                    date = "12/05/2025",
-                    amount = "120000000"
+                Movement(
+                    id = 14,
+                    movementDescription = "Gasolina",
+                    movementCategory = Category.TRANSPORTATION_EXPENSES,
+                    movementAmount = 40000,
+                    movementUser = "Daniel",
+                    dbMovementType = DbMovementType.EXPENSE,
+                    date = LocalDate.now(),
+                    month = 5,
+                    year = 2025
                 )
             ),
             rangeDates = Pair("12/05/2025", "12/06/2025"),
@@ -202,6 +200,8 @@ fun DashboardViewPreview() {
         onExpenseButtonClick = {},
         onFilterMenuClick = {},
         onFilterMenuDismiss = {},
-        onFilterCategorySelected = {}
+        onFilterCategorySelected = {},
+        onEditMovement = {},
+        onDeleteMovement = {}
     )
 }

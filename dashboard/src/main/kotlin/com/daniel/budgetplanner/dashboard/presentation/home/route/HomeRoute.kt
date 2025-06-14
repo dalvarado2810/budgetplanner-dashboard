@@ -50,7 +50,9 @@ fun HomeRoute(
         onExpenseButtonClick = viewModel::onExpenseButtonClickAction,
         onFilterMenuClick = viewModel::onFilterButtonClickAction,
         onFilterMenuDismiss = viewModel::onFilterMenuDismissAction,
-        onFilterCategorySelected = viewModel::onCategorySelectedAction
+        onFilterCategorySelected = viewModel::onCategorySelectedAction,
+        onEditMovement = {},
+        onDeleteMovement = viewModel::onSwipeDeleteAction
     )
 
 }

@@ -11,4 +11,8 @@ interface MovementRepository {
     fun getMovementsByName(startDate: String, endDate: String, user: String): Flow<DomainMovements>
 
     suspend fun addMovementToDb(movement: Movement)
+
+    suspend fun editMovement(movement: Movement)
+
+    suspend fun deleteMovement(movement: Movement)
 }

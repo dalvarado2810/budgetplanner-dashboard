@@ -61,4 +61,12 @@ class MovementRepositoryImpl(
 
     override suspend fun addMovementToDb(movement: Movement) =
         movementsDao.addMovement(movement.toMovementEntity())
+
+    override suspend fun editMovement(movement: Movement) {
+        movementsDao.editMovement(movement.toMovementEntity())
+    }
+
+    override suspend fun deleteMovement(movement: Movement) {
+        movementsDao.deleteMovement(movement.toMovementEntity())
+    }
 }

@@ -27,25 +27,30 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import com.daniel.base.ui.theme.BudgetGreen
 import com.daniel.budgetplanner.dashboard.R
+import com.daniel.budgetplanner.dashboard.data.utils.toMovementItem
 import com.daniel.budgetplanner.dashboard.domain.model.Category
-import com.daniel.budgetplanner.dashboard.domain.model.PresentationMovements
-import com.daniel.budgetplanner.dashboard.presentation.home.model.MovementItem
+import com.daniel.budgetplanner.dashboard.domain.model.DbMovementType
+import com.daniel.budgetplanner.dashboard.domain.model.DomainMovements
+import com.daniel.budgetplanner.dashboard.domain.model.Movement
 import com.daniel.budgetplanner.dashboard.utils.ALL_CATEGORIES
 import com.daniel.budgetplanner.dashboard.utils.GO_TO_TOP_IMAGE
 import com.daniel.budgetplanner.dashboard.utils.WEIGHT_ONE
 import kotlinx.coroutines.launch
+import java.time.LocalDate
 
 @Composable
 fun MovementsDetailsComponent(
     dates: Pair<String, String>,
     categorySelected: String,
-    movementsList: PresentationMovements,
+    movementsList: DomainMovements,
     isFilterCategoryMenuExpanded: Boolean,
     onFilterCategoryClick: () -> Unit,
     onFilterCategoryMenuDismiss: () -> Unit,
-    onCategorySelected: (String) -> Unit
+    onCategorySelected: (String) -> Unit,
+    onEditMovement: (Movement) -> Unit,
+    onDeleteMovement: (Movement) -> Unit
 ) {
-    val comparator = Comparator<MovementItem> { a, b -> a.date.compareTo(b.date) }
+    val comparator = Comparator<Movement> { a, b -> a.date.compareTo(b.date) }
     val coroutineScope = rememberCoroutineScope()
     val listState = rememberLazyListState()
     val isGoToTopEnabled by remember {
@@ -80,7 +85,7 @@ fun MovementsDetailsComponent(
                 val filteredList = movementsList
                     .filter {
                         categorySelected == ALL_CATEGORIES ||
-                        it.category.value == categorySelected
+                        it.movementCategory.value == categorySelected
                     }
                     .sortedWith(comparator)
                 if (filteredList.isEmpty()) {
@@ -95,10 +100,14 @@ fun MovementsDetailsComponent(
                            filteredList
                         ) { item ->
                             SwipeBoxComponent(
-                                onEdit = {},
-                                onDelete = {}
+                                onEdit = {
+                                    onEditMovement(item)
+                                },
+                                onDelete = {
+                                    onDeleteMovement(item)
+                                }
                             ) {
-                                MovementItemComponent(item = item)
+                                MovementItemComponent(item = item.toMovementItem())
                             }
                         }
                     }
@@ -146,28 +155,23 @@ fun MovementsDetailsComponentPreview() {
         dates = Pair("2025-05-31", "2025-06-30"),
         categorySelected = "Todas las Categorías",
         movementsList = listOf(
-            MovementItem(
-                name = "ingreso sueldo",
-                category = Category.MONTHLY_INCOMES,
-                amount = "1500000",
-                date = "2025-05-31"
-            ),
-            MovementItem(
-                name = "ingreso varios",
-                category = Category.FOOD_EXPENSES,
-                amount = "200000",
-                date = "2025-05-31"
-            ),
-            MovementItem(
-                name = "Pago luz",
-                category = Category.SERVICES_EXPENSES,
-                amount = "50600",
-                date = "2025-05-31"
+            Movement(
+                id = 12,
+                movementDescription = "ingreso sueldo",
+                movementCategory = Category.MONTHLY_INCOMES,
+                movementAmount = 1500000,
+                movementUser = "Daniel",
+                dbMovementType = DbMovementType.INCOME,
+                date = LocalDate.now(),
+                month = 5,
+                year = 2025
             )
         ),
         isFilterCategoryMenuExpanded = false,
         onFilterCategoryClick = {},
         onFilterCategoryMenuDismiss = {},
-        onCategorySelected = {}
+        onCategorySelected = {},
+        onEditMovement = {},
+        onDeleteMovement = {}
     )
 }

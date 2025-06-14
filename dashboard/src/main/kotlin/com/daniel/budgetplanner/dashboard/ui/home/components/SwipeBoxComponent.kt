@@ -82,7 +82,10 @@ fun SwipeBoxComponent(
 
     when (swipeState.currentValue) {
         SwipeToDismissBoxValue.EndToStart -> {
-            onDelete()
+            LaunchedEffect(swipeState) {
+                onDelete()
+                swipeState.snapTo(SwipeToDismissBoxValue.Settled)
+            }
         }
 
         SwipeToDismissBoxValue.StartToEnd -> {

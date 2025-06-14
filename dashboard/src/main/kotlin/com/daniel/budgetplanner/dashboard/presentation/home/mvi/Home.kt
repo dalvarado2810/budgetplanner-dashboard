@@ -4,7 +4,9 @@ import com.daniel.base.presentation.ViewAction
 import com.daniel.base.presentation.ViewEffect
 import com.daniel.base.presentation.ViewState
 import com.daniel.budgetplanner.dashboard.domain.model.DashboardBalances
-import com.daniel.budgetplanner.dashboard.domain.model.PresentationMovements
+import com.daniel.budgetplanner.dashboard.domain.model.DomainMovements
+import com.daniel.budgetplanner.dashboard.domain.model.Movement
+import com.daniel.budgetplanner.dashboard.presentation.home.model.DeleteAction
 import com.daniel.budgetplanner.dashboard.utils.ALL_CATEGORIES
 import java.time.LocalDate
 
@@ -17,7 +19,7 @@ object Home {
         data class Content(
             val name: String,
             val actualBalances: DashboardBalances,
-            val movements: PresentationMovements,
+            val movements: DomainMovements,
             val rangeDates: Pair<String, String>,
             val categorySelected: String = ALL_CATEGORIES,
             val isFilterShown: Boolean = false,
@@ -63,9 +65,9 @@ object Home {
             val endDate: LocalDate?
         ) : Action()
 
-        data class OnSwipeDelete(val position: Int) : Action()
+        data class OnSwipeDelete(val deleteAction: DeleteAction) : Action()
 
-        data class OnSwipeModify(val position: Int) : Action()
+        data class OnSwipeEdit(val movement: Movement) : Action()
 
         data object ConfirmEraseUser : Action()
 

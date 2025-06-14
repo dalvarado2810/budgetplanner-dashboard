@@ -1,6 +1,8 @@
 package com.daniel.budgetplanner.dashboard.ui.home.screen
 
 import androidx.compose.runtime.Composable
+import com.daniel.budgetplanner.dashboard.domain.model.Movement
+import com.daniel.budgetplanner.dashboard.presentation.home.model.DeleteAction
 import com.daniel.budgetplanner.dashboard.presentation.home.mvi.Home
 import com.daniel.budgetplanner.dashboard.ui.home.view.HomeLoadingView
 import com.daniel.budgetplanner.dashboard.ui.home.view.HomeView
@@ -24,7 +26,9 @@ fun HomeScreen(
     onExpenseButtonClick: () -> Unit,
     onFilterMenuClick: () -> Unit,
     onFilterMenuDismiss: () -> Unit,
-    onFilterCategorySelected: (String) -> Unit
+    onFilterCategorySelected: (String) -> Unit,
+    onEditMovement: (Movement) -> Unit,
+    onDeleteMovement: (DeleteAction) -> Unit
 ) {
     when (state) {
         is Home.State.Content -> {
@@ -45,7 +49,17 @@ fun HomeScreen(
                 onExpenseButtonClick = onExpenseButtonClick,
                 onFilterMenuClick = onFilterMenuClick,
                 onFilterMenuDismiss = onFilterMenuDismiss,
-                onFilterCategorySelected = onFilterCategorySelected
+                onFilterCategorySelected = onFilterCategorySelected,
+                onEditMovement = onEditMovement,
+                onDeleteMovement = { movement ->
+                    onDeleteMovement(
+                        DeleteAction(
+                            userName = state.name,
+                            rangeOfDate = state.rangeDates,
+                            movement = movement
+                        )
+                    )
+                }
             )
         }
         is Home.State.Error -> {}

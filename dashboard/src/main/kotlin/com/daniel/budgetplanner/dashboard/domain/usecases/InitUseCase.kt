@@ -2,20 +2,17 @@ package com.daniel.budgetplanner.dashboard.domain.usecases
 
 import com.daniel.base.domain.repository.StorageRepository
 import com.daniel.base.domain.usecase.FlowUseCase
-import com.daniel.budgetplanner.dashboard.data.utils.toPresentationMovements
 import com.daniel.budgetplanner.dashboard.domain.repositories.MovementRepository
 import com.daniel.budgetplanner.dashboard.domain.usecases.model.InitUseCaseResult
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.map
 
 class InitUseCase(
     val storageRepository: StorageRepository,
     val movementDbRepository: MovementRepository
 ) : FlowUseCase<Unit, InitUseCaseResult, Nothing>() {
     override suspend fun executeOnBackground(params: Unit): Flow<InitUseCaseResult> {
-
         val user = storageRepository.getUser()
         val startDate = storageRepository.getStartDate()
         val endDate = storageRepository.getEndData()
@@ -25,9 +22,7 @@ class InitUseCase(
             endDate = endDate.toString(),
             user = user.toString()
         )
-        val userMovements = movementsFlow.map { domainMovementsList ->
-            domainMovementsList.toPresentationMovements()
-        }.first()
+        val userMovements = movementsFlow.first()
 
         val balances = movementDbRepository.getActualBalance(
             startDate = startDate.toString(),
@@ -38,7 +33,7 @@ class InitUseCase(
         return flowOf(
             InitUseCaseResult(
                 userName = user.toString(),
-                rangeOfDates = rangeOfDates ,
+                rangeOfDates = rangeOfDates,
                 userMovements = userMovements,
                 actualBalances = balances
             )
