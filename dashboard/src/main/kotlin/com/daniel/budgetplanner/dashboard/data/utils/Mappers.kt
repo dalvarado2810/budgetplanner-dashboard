@@ -2,10 +2,14 @@ package com.daniel.budgetplanner.dashboard.data.utils
 
 import com.daniel.budgetplanner.dashboard.data.local.entities.MovementEntity
 import com.daniel.budgetplanner.dashboard.domain.model.Category
-import com.daniel.budgetplanner.dashboard.domain.model.DomainMovements
+import com.daniel.budgetplanner.dashboard.domain.model.DbMovementType
 import com.daniel.budgetplanner.dashboard.domain.model.Movement
+import com.daniel.budgetplanner.dashboard.navigation.DashboardDestination
 import com.daniel.budgetplanner.dashboard.presentation.home.model.MovementItem
 import com.daniel.budgetplanner.dashboard.presentation.movementdialog.model.MovementDialogData
+import com.daniel.budgetplanner.dashboard.presentation.movementdialog.model.MovementDialogEditModeData
+import com.daniel.budgetplanner.dashboard.utils.INCOME
+import java.time.LocalDate
 
 fun Movement.toMovementEntity() = MovementEntity(
     id = id,
@@ -50,6 +54,18 @@ fun MovementDialogData.toMovement(username: String) = Movement(
     year = date.year
 )
 
+fun MovementDialogEditModeData.toMovement(username: String) = Movement(
+    id = movementToEdit.id,
+    movementDescription = movementDescription,
+    movementAmount = movementAmount.toInt(),
+    dbMovementType = dbMovementType,
+    movementUser = username,
+    movementCategory = movementCategory.toCategory(),
+    date = date,
+    month = date.monthValue,
+    year = date.year
+)
+
 fun String.toCategory(): Category {
     return when(this) {
         "Alimentación" -> Category.FOOD_EXPENSES
@@ -63,4 +79,19 @@ fun String.toCategory(): Category {
     }
 }
 
-fun DomainMovements.toPresentationMovements() = this.map { it.toMovementItem() }
+fun String.toDbMovementType() = when(this){
+    INCOME -> DbMovementType.INCOME
+    else -> DbMovementType.EXPENSE
+}
+
+fun DashboardDestination.MovementDialog.toMovement() = Movement(
+    id = id,
+    movementDescription = movementDescription,
+    movementAmount = movementAmount,
+    dbMovementType = dbMovementType.toDbMovementType(),
+    movementCategory = movementCategory.toCategory(),
+    movementUser = movementUser,
+    date = LocalDate.of(year, month, day),
+    month = month,
+    year = year
+)

@@ -14,10 +14,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.daniel.budgetplanner.dashboard.R
 import com.daniel.budgetplanner.dashboard.presentation.movementdialog.model.MovementDialogData
+import com.daniel.budgetplanner.dashboard.presentation.movementdialog.model.MovementDialogEditModeData
 import com.daniel.budgetplanner.dashboard.presentation.movementdialog.model.MovementOperation
 import com.daniel.budgetplanner.dashboard.presentation.movementdialog.mvi.MovementDialog
 import com.daniel.budgetplanner.dashboard.ui.home.components.ContinueButton
 import com.daniel.budgetplanner.dashboard.utils.DEFAULT_CATEGORY
+import com.daniel.budgetplanner.dashboard.utils.toMovementDialogData
+import com.daniel.budgetplanner.dashboard.utils.toMovementDialogEditModeData
 import java.time.LocalDate
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
@@ -34,6 +37,7 @@ fun MovementDialogContent(
     onCategorySelected: (String) -> Unit,
     onCategoryPickerDismiss: () -> Unit,
     onContinueButtonClick: (movement: MovementDialogData) ->  Unit,
+    onContinueButtonClickEditMode: (movement: MovementDialogEditModeData) -> Unit,
     onCloseIconClick: () -> Unit
 ) {
     val color = movementOperation.movementColor
@@ -89,14 +93,14 @@ fun MovementDialogContent(
                     state.descriptionText.isNotEmpty() &&
                     state.categorySelected != DEFAULT_CATEGORY
         ) {
-            val movement = MovementDialogData(
-                movementDescription = state.descriptionText,
-                movementAmount = state.amountText,
-                dbMovementType = movementOperation.dbMovementType,
-                movementCategory = state.categorySelected,
-                date = state.dateSelected
-            )
-            onContinueButtonClick(movement)
+            val isEditMode = state.movementToEdit != null
+            if (!isEditMode) {
+                val movement = state.toMovementDialogData(movementOperation)
+                onContinueButtonClick(movement)
+            } else {
+                val movementToEdit = state.toMovementDialogEditModeData(movementOperation)
+                onContinueButtonClickEditMode(movementToEdit)
+            }
         }
 
         if(state.isDatePickerShown) {
@@ -113,14 +117,14 @@ fun MovementDialogContent(
 fun MovementDialogContentPreview() {
     MovementDialogContent(
         state = MovementDialog.State.Content(
-            movementOperation = MovementOperation.INCOME_OPERATION,
             descriptionText = "Sueldo",
             amountText = "1200000",
             dateSelected = LocalDate.now(),
             categorySelected = "Ingreso Mensual",
             isContinueButtonEnabled = false,
             isDatePickerShown = false,
-            isCategoryPickerShown = false
+            isCategoryPickerShown = false,
+            movementOperation = MovementOperation.INCOME_OPERATION
         ),
         movementOperation = MovementOperation.INCOME_OPERATION,
         onCategorySelected = {},
@@ -132,6 +136,7 @@ fun MovementDialogContentPreview() {
         onContinueButtonClick = {},
         onCloseIconClick = {},
         onAmountChange = {},
-        onDescriptionChange = {}
+        onDescriptionChange = {},
+        onContinueButtonClickEditMode = {}
     )
 }

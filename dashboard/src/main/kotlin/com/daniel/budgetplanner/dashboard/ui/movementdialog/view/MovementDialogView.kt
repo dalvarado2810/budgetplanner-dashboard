@@ -11,6 +11,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.daniel.base.ui.theme.CardColor
 import com.daniel.budgetplanner.dashboard.R
 import com.daniel.budgetplanner.dashboard.presentation.movementdialog.model.MovementDialogData
+import com.daniel.budgetplanner.dashboard.presentation.movementdialog.model.MovementDialogEditModeData
 import com.daniel.budgetplanner.dashboard.presentation.movementdialog.model.MovementOperation
 import com.daniel.budgetplanner.dashboard.presentation.movementdialog.mvi.MovementDialog
 import com.daniel.budgetplanner.dashboard.ui.movementdialog.components.MovementDialogContent
@@ -30,6 +31,7 @@ fun MovementDialogView(
     onCategorySelected: (String) -> Unit,
     onCategoryPickerDismiss: () -> Unit,
     onContinueButtonClick: (movement: MovementDialogData) ->  Unit,
+    onContinueButtonClickEditMode: (movement: MovementDialogEditModeData) -> Unit,
     onCloseIconClick: () -> Unit
 ) {
     val bottomSheetState = rememberModalBottomSheetState(
@@ -54,7 +56,8 @@ fun MovementDialogView(
                 onDateSelected = onDateSelected,
                 onDatePickerDismiss = onDatePickerDismiss,
                 onCloseIconClick = onCloseIconClick,
-                onContinueButtonClick = onContinueButtonClick
+                onContinueButtonClick = onContinueButtonClick,
+                onContinueButtonClickEditMode = onContinueButtonClickEditMode
             )
         },
         containerColor = CardColor,
@@ -70,14 +73,14 @@ fun MovementDialogView(
 fun PreviewMovementDialogComponent() {
     MovementDialogView(
         state = MovementDialog.State.Content(
-            movementOperation = MovementOperation.INCOME_OPERATION,
             descriptionText = "ingreso",
             amountText = "",
             dateSelected = LocalDate.now(),
             categorySelected = "Ingreso Mensual",
             isContinueButtonEnabled = false,
             isDatePickerShown = false,
-            isCategoryPickerShown = false
+            isCategoryPickerShown = false,
+            movementOperation = MovementOperation.INCOME_OPERATION
         ),
         movementOperation = MovementOperation.EXPENSE_OPERATION,
         onAmountChange = {},
@@ -89,6 +92,7 @@ fun PreviewMovementDialogComponent() {
         onDateSelected = {},
         onDatePickerDismiss = {},
         onContinueButtonClick = {},
-        onCloseIconClick = {}
+        onCloseIconClick = {},
+        onContinueButtonClickEditMode = {}
     )
 }

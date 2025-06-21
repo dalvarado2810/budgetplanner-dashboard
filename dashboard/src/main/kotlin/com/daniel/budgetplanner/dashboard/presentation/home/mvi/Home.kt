@@ -82,5 +82,9 @@ object Home {
         data object NavigateToGetStarted : Effect()
 
         data object NavigateToHomeInit : Effect()
+
+        data class NavigateToEditMovementDialog(
+            val movement: Movement
+        ) : Effect()
     }
 }

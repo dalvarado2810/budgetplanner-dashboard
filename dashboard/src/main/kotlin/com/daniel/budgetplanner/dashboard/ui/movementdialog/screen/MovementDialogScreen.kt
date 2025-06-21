@@ -2,6 +2,7 @@ package com.daniel.budgetplanner.dashboard.ui.movementdialog.screen
 
 import androidx.compose.runtime.Composable
 import com.daniel.budgetplanner.dashboard.presentation.movementdialog.model.MovementDialogData
+import com.daniel.budgetplanner.dashboard.presentation.movementdialog.model.MovementDialogEditModeData
 import com.daniel.budgetplanner.dashboard.presentation.movementdialog.model.MovementOperation
 import com.daniel.budgetplanner.dashboard.presentation.movementdialog.mvi.MovementDialog
 import com.daniel.budgetplanner.dashboard.ui.movementdialog.view.MovementDialogView
@@ -20,13 +21,17 @@ fun MovementDialogScreen(
     onCategorySelected: (String) -> Unit,
     onCategoryPickerDismiss: () -> Unit,
     onContinueButtonClick: (movement: MovementDialogData) ->  Unit,
+    onContinueButtonClickEditMode: (movement: MovementDialogEditModeData) -> Unit,
     onCloseIconClick: () -> Unit
 ) {
     require(state is MovementDialog.State.Content)
+    val operation = if(state.movementToEdit != null) {
+        state.movementOperation
+    } else movementOperation
 
     MovementDialogView(
         state = state,
-        movementOperation = movementOperation,
+        movementOperation = operation,
         onAmountChange = onAmountChange,
         onDescriptionChange = onDescriptionChange,
         onCategorySelected = onCategorySelected,
@@ -36,6 +41,7 @@ fun MovementDialogScreen(
         onDateSelected = onDateSelected,
         onDatePickerDismiss = onDatePickerDismiss,
         onCloseIconClick = onCloseIconClick,
-        onContinueButtonClick = onContinueButtonClick
+        onContinueButtonClick = onContinueButtonClick,
+        onContinueButtonClickEditMode = onContinueButtonClickEditMode
     )
 }

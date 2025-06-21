@@ -13,7 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.daniel.base.ui.theme.BudgetGreen
 import com.daniel.budgetplanner.dashboard.R
 import com.daniel.budgetplanner.dashboard.utils.DashboardTextStyles
-import com.daniel.budgetplanner.dashboard.utils.INCOME
+import com.daniel.budgetplanner.dashboard.utils.INCOME_TITLE
 
 @Composable
 fun TopDialogTitleComponent(
@@ -44,7 +44,7 @@ fun TopDialogTitleComponent(
 @Composable
 fun PreviewTopDialogTitleComponent() {
     TopDialogTitleComponent(
-        title = INCOME,
+        title = INCOME_TITLE,
         color = BudgetGreen
     )
 }

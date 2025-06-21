@@ -4,7 +4,9 @@ import com.daniel.base.presentation.ViewAction
 import com.daniel.base.presentation.ViewEffect
 import com.daniel.base.presentation.ViewState
 import com.daniel.base.presentation.model.DoNotThrottle
+import com.daniel.budgetplanner.dashboard.domain.model.Movement
 import com.daniel.budgetplanner.dashboard.presentation.movementdialog.model.MovementDialogData
+import com.daniel.budgetplanner.dashboard.presentation.movementdialog.model.MovementDialogEditModeData
 import com.daniel.budgetplanner.dashboard.presentation.movementdialog.model.MovementOperation
 import java.time.LocalDate
 
@@ -16,6 +18,7 @@ object MovementDialog {
             val amountText: String,
             val dateSelected: LocalDate,
             val categorySelected: String,
+            val movementToEdit: Movement? = null,
             val isContinueButtonEnabled: Boolean,
             val isDatePickerShown: Boolean,
             val isCategoryPickerShown: Boolean
@@ -31,6 +34,11 @@ object MovementDialog {
         @DoNotThrottle
         data class AmountChange(
             val amountValue: String
+        ) : Action()
+
+        data class EditDialogInit(
+            val movement: Movement,
+            val movementOperation: MovementOperation
         ) : Action()
 
         data object DateChangeIconClick : Action()
@@ -53,6 +61,10 @@ object MovementDialog {
 
         data class SaveButtonClick(
             val movement: MovementDialogData
+        ) : Action()
+
+        data class SaveButtonEditModeClick(
+            val movement: MovementDialogEditModeData
         ) : Action()
 
         data object CloseDialogIconClick : Action()

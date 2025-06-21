@@ -13,6 +13,10 @@ import com.daniel.base.ui.theme.BudgetGreen
 import com.daniel.base.ui.theme.ExpensesColor
 import com.daniel.budgetplanner.dashboard.R
 import com.daniel.budgetplanner.dashboard.domain.model.Category
+import com.daniel.budgetplanner.dashboard.presentation.movementdialog.model.MovementDialogData
+import com.daniel.budgetplanner.dashboard.presentation.movementdialog.model.MovementDialogEditModeData
+import com.daniel.budgetplanner.dashboard.presentation.movementdialog.model.MovementOperation
+import com.daniel.budgetplanner.dashboard.presentation.movementdialog.mvi.MovementDialog
 import java.text.NumberFormat
 import java.time.Instant
 import java.time.LocalDate
@@ -96,3 +100,22 @@ fun Category.toAmountColor() = when (this) {
 
     else -> ExpensesColor
 }
+
+fun MovementDialog.State.Content
+    .toMovementDialogData(operation: MovementOperation) = MovementDialogData(
+    movementDescription = descriptionText,
+    movementAmount = amountText,
+    dbMovementType = operation.dbMovementType,
+    movementCategory = categorySelected,
+    date = dateSelected
+)
+
+fun MovementDialog.State.Content.toMovementDialogEditModeData(operation: MovementOperation) =
+    MovementDialogEditModeData(
+        movementDescription = descriptionText,
+        movementAmount = amountText,
+        dbMovementType = operation.dbMovementType,
+        movementCategory = categorySelected,
+        date = dateSelected,
+        movementToEdit = movementToEdit!!
+    )

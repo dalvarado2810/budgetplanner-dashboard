@@ -20,6 +20,7 @@ import com.daniel.budgetplanner.dashboard.presentation.home.action.OnNewPeriodSe
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnPolicyClickActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnPolicyDialogDismissActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnSwipeDeleteActionProcessor
+import com.daniel.budgetplanner.dashboard.presentation.home.action.OnSwipeEditActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.action.OnToggleVisibilityActionProcessor
 import com.daniel.budgetplanner.dashboard.presentation.home.model.DeleteAction
 import com.daniel.budgetplanner.dashboard.presentation.home.mvi.Home
@@ -44,7 +45,8 @@ class HomeViewModel(
     val onCategorySelectedActionProcessor: OnCategorySelectedActionProcessor,
     val onIncomeButtonClickActionProcessor: OnIncomeButtonClickActionProcessor,
     val onExpenseButtonClickActionProcessor: OnExpenseButtonClickActionProcessor,
-    val onSwipeDeleteActionProcessor: OnSwipeDeleteActionProcessor
+    val onSwipeDeleteActionProcessor: OnSwipeDeleteActionProcessor,
+    val onSwipeEditActionProcessor: OnSwipeEditActionProcessor
 ) : BaseViewModel<Home.State, Home.Action, Home.Effect>(
     initialState = Home.State.Loading,
     initialAction = Home.Action.Init
@@ -183,7 +185,9 @@ class HomeViewModel(
             is Home.Action.OnSwipeDelete -> {
                 onSwipeDeleteActionProcessor.process(action, sideEffect)
             }
-            is Home.Action.OnSwipeEdit -> TODO()
+            is Home.Action.OnSwipeEdit -> {
+                onSwipeEditActionProcessor.process(action, sideEffect)
+            }
         }
     }
 }

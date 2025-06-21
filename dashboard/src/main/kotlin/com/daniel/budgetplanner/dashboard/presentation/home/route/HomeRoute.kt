@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.daniel.base.utils.extension.CollectEffectWithLifecycle
+import com.daniel.budgetplanner.dashboard.domain.model.Movement
 import com.daniel.budgetplanner.dashboard.presentation.home.mvi.Home
 import com.daniel.budgetplanner.dashboard.presentation.home.viewmodel.HomeViewModel
 import com.daniel.budgetplanner.dashboard.ui.home.screen.HomeScreen
@@ -15,7 +16,8 @@ fun HomeRoute(
     navigateToGetStarted: () -> Unit,
     navigateToHomeInit: () -> Unit,
     navigateToIncomeDialog: () -> Unit,
-    navigateToExpenseDialog: () -> Unit
+    navigateToExpenseDialog: () -> Unit,
+    navigateToEditMovementDialog: (Movement) -> Unit
 ) {
     val viewState by viewModel.state.collectAsStateWithLifecycle()
 
@@ -25,6 +27,8 @@ fun HomeRoute(
             is Home.Effect.NavigateToIncomeDialog -> navigateToIncomeDialog()
             is Home.Effect.NavigateToGetStarted -> navigateToGetStarted()
             is Home.Effect.NavigateToHomeInit -> navigateToHomeInit()
+            is Home.Effect.NavigateToEditMovementDialog ->
+                navigateToEditMovementDialog(effect.movement)
         }
     }
 
@@ -51,7 +55,7 @@ fun HomeRoute(
         onFilterMenuClick = viewModel::onFilterButtonClickAction,
         onFilterMenuDismiss = viewModel::onFilterMenuDismissAction,
         onFilterCategorySelected = viewModel::onCategorySelectedAction,
-        onEditMovement = {},
+        onEditMovement = viewModel::onSwipeEditAction,
         onDeleteMovement = viewModel::onSwipeDeleteAction
     )
 
