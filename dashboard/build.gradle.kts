@@ -1,3 +1,5 @@
+import java.io.ByteArrayOutputStream
+
 plugins {
     id("kotlin-android")
     id("com.android.library")
@@ -19,12 +21,6 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    publishing {
-        singleVariant("debug") {
-            withSourcesJar()
-        }
-    }
-
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -41,23 +37,40 @@ android {
     kotlinOptions {
         jvmTarget = "21"
     }
+    publishing {
+        singleVariant("release")
+    }
 }
 
 publishing {
     publications {
-        create<MavenPublication>("debug") {
+        create<MavenPublication>("release") {
             groupId = "com.daniel.budgetplanner"
             artifactId = "dashboard"
-            version = "1.0.0"
+            version = getVersionTag()
 
             afterEvaluate {
-                from(components["debug"])
+                from(components["release"])
             }
 
             pom {
                 name.set("Budget Dashboard")
             }
         }
+    }
+}
+
+fun getVersionTag(): String {
+    val stdout = ByteArrayOutputStream()
+    try {
+        exec {
+            commandLine("git", "describe", "--tags", "--abbrev=0")
+            standardOutput = stdout
+        }
+        val version = stdout.toString().trim()
+        return if (version.startsWith("v")) version.substring(1) else version
+    } catch (e: Exception) {
+        return "1.0.0"
     }
 }
 

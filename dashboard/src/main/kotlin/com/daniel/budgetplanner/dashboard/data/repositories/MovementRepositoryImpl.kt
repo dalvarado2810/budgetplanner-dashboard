@@ -51,7 +51,7 @@ class MovementRepositoryImpl(
         endDate: String,
         user: String
     ) : Flow<DomainMovements> {
-        val movementDbFlow = movementsDao.getAllMonthlyMovements(startDate, endDate)
+        val movementDbFlow = movementsDao.getAllMonthlyMovementsByUser(startDate, endDate, user)
         return movementDbFlow.map { listOfMovementDb ->
             listOfMovementDb.map {
                 it.toMovement()
