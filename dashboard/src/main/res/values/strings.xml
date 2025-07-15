@@ -82,6 +82,8 @@
     <string name="category">Tipo</string>
     <string name="save_movement">Guardar</string>
     <string name="item_amount">$ %1$s</string>
+    <string name="icon_description_modify">Icono Modificar</string>
+    <string name="icon_description_delete">Icono Borrar</string>
     <string name="no_movements_add">No tienes transacciones agregadas</string>
     <string name="no_categories_movements_add">No tienes transacciones agregadas para esta categoria</string>
     <string name="add_movement_amount">Debes agregar un monto superior a CERO</string>

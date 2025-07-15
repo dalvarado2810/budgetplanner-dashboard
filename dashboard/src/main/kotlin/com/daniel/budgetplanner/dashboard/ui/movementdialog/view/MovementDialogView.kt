@@ -35,6 +35,7 @@ fun MovementDialogView(
     onCloseIconClick: () -> Unit
 ) {
     val bottomSheetState = rememberModalBottomSheetState(
+        skipPartiallyExpanded = true,
         confirmValueChange = {
             it != SheetValue.Hidden
         }

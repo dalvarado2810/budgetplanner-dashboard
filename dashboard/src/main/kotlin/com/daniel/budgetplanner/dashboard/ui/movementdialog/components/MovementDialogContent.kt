@@ -1,9 +1,9 @@
 package com.daniel.budgetplanner.dashboard.ui.movementdialog.components
 
-import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -41,16 +41,13 @@ fun MovementDialogContent(
     onCloseIconClick: () -> Unit
 ) {
     val color = movementOperation.movementColor
-    Log.e("state","description = ${state.descriptionText}")
-    Log.e("state","amount = ${state.amountText}")
-    Log.e("state","date = ${state.dateSelected}")
-    Log.e("state","category = ${state.categorySelected}")
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.dimen_2dp)),
         modifier = Modifier
             .padding(bottom = dimensionResource(R.dimen.dimen_24dp))
+            .heightIn(max = dimensionResource(R.dimen.dimen_600dp))
     ) {
         TopDialogTitleComponent(
             title = movementOperation.title,
